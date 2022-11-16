@@ -1,0 +1,120 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Generate Vault policies using the template format - vkv</title>
+<meta name=description content=" export/import secrets from Vaults KV2 engine">
+<meta name=generator content="Hugo 0.92.2">
+<link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/export/advanced_examples/vault_policies/>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
+<script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
+<script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
+<meta property="og:title" content="Generate Vault policies using the template format">
+<meta property="og:description" content="vkv can be used to generate policies from an existing KV path. When using the template output format, all the data is passed to STDOUT as a
+map[string][]entry where entry is a struct of
+type entry struct { Key string Value interface{} } Which means you can iterate over the map, where the map-key is the secret path and iterate again over the slice of entries in order to access the key and value of the secret (also see assets/template.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/export/advanced_examples/vault_policies/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="export">
+<meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta name=twitter:title content="Generate Vault policies using the template format">
+<meta name=twitter:description content="vkv can be used to generate policies from an existing KV path. When using the template output format, all the data is passed to STDOUT as a
+map[string][]entry where entry is a struct of
+type entry struct { Key string Value interface{} } Which means you can iterate over the map, where the map-key is the secret path and iterate again over the slice of entries in order to access the key and value of the secret (also see assets/template.">
+<meta itemprop=name content="Generate Vault policies using the template format">
+<meta itemprop=description content="vkv can be used to generate policies from an existing KV path. When using the template output format, all the data is passed to STDOUT as a
+map[string][]entry where entry is a struct of
+type entry struct { Key string Value interface{} } Which means you can iterate over the map, where the map-key is the secret path and iterate again over the slice of entries in order to access the key and value of the secret (also see assets/template.">
+<meta itemprop=wordCount content="119"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=keywords content></head>
+<body><div class=container><header>
+<h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
+<p class=description> export/import secrets from Vaults KV2 engine</p>
+</header>
+<div class=global-menu>
+<nav>
+<ul>
+<li id=home><a href=/vkv/></a></li></ul>
+</nav>
+</div>
+<div class=content-container>
+<main><h1>Generate Vault policies using the template format</h1>
+<p><code>vkv</code> can be used to generate policies from an existing KV path.
+When using the template output format, all the data is passed to STDOUT as a</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>][]<span style=color:#a6e22e>entry</span>
+</code></pre></div><p>where <code>entry</code> is a struct of</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>entry</span> <span style=color:#66d9ef>struct</span> {
+  <span style=color:#a6e22e>Key</span>   <span style=color:#66d9ef>string</span>
+  <span style=color:#a6e22e>Value</span> <span style=color:#66d9ef>interface</span>{}
+}
+</code></pre></div><p>Which means you can iterate over the map, where the map-key is the secret path and iterate again over the slice of entries in order to access the key and value of the secret (also see <a href=assets/template.tmpl>assets/template.tmpl</a>).</p>
+<p>Knowing this, one can generate Vault policies from an existing KV-engine using the following Go-Template-Snippet:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go>{{ <span style=color:#66d9ef>range</span> <span style=color:#960050;background-color:#1e0010>$</span><span style=color:#a6e22e>path</span>, <span style=color:#960050;background-color:#1e0010>$</span><span style=color:#a6e22e>data</span> <span style=color:#f92672>:=</span> . }}
+<span style=color:#a6e22e>path</span> <span style=color:#e6db74>&#34;{{ $path }}/*&#34;</span> {
+    <span style=color:#a6e22e>capabilities</span> = [ <span style=color:#e6db74>&#34;create&#34;</span>, <span style=color:#e6db74>&#34;read&#34;</span> ]
+}
+{{ <span style=color:#a6e22e>end</span> }}
+</code></pre></div><p>results in:</p>
+<p><img src=../../../images/policies.gif alt></p>
+<div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/export/advanced_examples/vault_policies.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/export/advanced_examples/diff/ title="Compare and highlight the differences using diff"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Compare and highlight the differences using diff</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/export/advanced_examples/fzf/ title="Show all KV-engines and secrets the using fzf and jq">Next - Show all KV-engines and secrets the using fzf and jq <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+</nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
+</footer>
+</main>
+<div class=sidebar>
+<nav class=slide-menu>
+<ul>
+<li><a href=https://falcosuessgott.github.io/vkv/>Home</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/installation/>Installation</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/authentication/>Authentication</a>
+</li>
+<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/export/>Secret Export<span class="mark opened">-</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/export/usage/>Usage</a></li>
+<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/export/formats/>Export Formats<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/export/formats/base/>Base</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/export/formats/json/>JSON</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/export/formats/yaml/>YAML</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/export/formats/markdown/>Markdown</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/export/formats/token_policy/>Token Policy Matrix</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/export/formats/export/>Export</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/export/formats/template/>Template</a></li>
+</ul>
+</li>
+<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/export/advanced_examples/>Advanced Examples<span class="mark opened">-</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/export/advanced_examples/diff/>Compare and highlight the differences using diff</a></li>
+<li class=active><a href=https://falcosuessgott.github.io/vkv/export/advanced_examples/vault_policies/>Generate Vault policies using the template format</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/export/advanced_examples/fzf/>Show all KV-engines and secrets the using fzf and jq</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/import/>Secret Import<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/import/usage/>Usage</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/development/>Development</a>
+</li>
+</ul>
+</nav>
+<div class=sidebar-footer></div>
+</div>
+</div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20>
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>
