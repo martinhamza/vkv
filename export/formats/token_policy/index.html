@@ -15,17 +15,23 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="Token Policy Matrix">
-<meta property="og:description" content>
+<meta property="og:description" content="Print the current tokens policy capabilities in a matrix.
+Requires the update capabilities on /sys/capabilities-self, which is set by the default policy
+Required flags vkv --path <path> --format=policy Demo ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/export/formats/token_policy/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="export">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="Token Policy Matrix">
-<meta name=twitter:description content>
+<meta name=twitter:description content="Print the current tokens policy capabilities in a matrix.
+Requires the update capabilities on /sys/capabilities-self, which is set by the default policy
+Required flags vkv --path <path> --format=policy Demo ">
 <meta itemprop=name content="Token Policy Matrix">
-<meta itemprop=description content>
-<meta itemprop=wordCount content="0"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=description content="Print the current tokens policy capabilities in a matrix.
+Requires the update capabilities on /sys/capabilities-self, which is set by the default policy
+Required flags vkv --path <path> --format=policy Demo ">
+<meta itemprop=wordCount content="29"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -39,8 +45,15 @@
 </div>
 <div class=content-container>
 <main><h1>Token Policy Matrix</h1>
-<p><img src=../../../images/fzf.gif alt></p>
-<div class=edit-meta>
+<p>Print the current <a href=https://developer.hashicorp.com/vault/docs/commands/token/capabilities>tokens policy capabilities</a> in a matrix.</p>
+<p><strong>Requires the <code>update</code> capabilities on <a href=https://developer.hashicorp.com/vault/api-docs/system/capabilities-self><code>/sys/capabilities-self</code></a>, which is set by the default policy</strong></p>
+<h3 id=required-flags>Required flags</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv --path &lt;path&gt; --format<span style=color:#f92672>=</span>policy
+</code></pre></div><h3 id=demo>Demo</h3>
+<div align=center>
+<br>
+<img src=../../../images/policy.gif alt=drawing width=1000>
+</div><div class=edit-meta>
 <br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/export/formats/token_policy.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/export/formats/markdown/ title=Markdown><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Markdown</a>
 <a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/export/formats/export/ title=Export>Next - Export <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>

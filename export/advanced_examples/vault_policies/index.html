@@ -15,23 +15,20 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="Generate Vault policies using the template format">
-<meta property="og:description" content="vkv can be used to generate policies from an existing KV path. When using the template output format, all the data is passed to STDOUT as a
-map[string][]entry where entry is a struct of
-type entry struct { Key string Value interface{} } Which means you can iterate over the map, where the map-key is the secret path and iterate again over the slice of entries in order to access the key and value of the secret (also see assets/template.">
+<meta property="og:description" content="Applying the following template-snippet to vkvs template-format we can generate vault policies for each path:
+{{ range $path, $data := . }} path &#34;{{ $path }}/*&#34; { capabilities = [ &#34;create&#34;, &#34;read&#34; ] } {{ end }} Demo ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/export/advanced_examples/vault_policies/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="export">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="Generate Vault policies using the template format">
-<meta name=twitter:description content="vkv can be used to generate policies from an existing KV path. When using the template output format, all the data is passed to STDOUT as a
-map[string][]entry where entry is a struct of
-type entry struct { Key string Value interface{} } Which means you can iterate over the map, where the map-key is the secret path and iterate again over the slice of entries in order to access the key and value of the secret (also see assets/template.">
+<meta name=twitter:description content="Applying the following template-snippet to vkvs template-format we can generate vault policies for each path:
+{{ range $path, $data := . }} path &#34;{{ $path }}/*&#34; { capabilities = [ &#34;create&#34;, &#34;read&#34; ] } {{ end }} Demo ">
 <meta itemprop=name content="Generate Vault policies using the template format">
-<meta itemprop=description content="vkv can be used to generate policies from an existing KV path. When using the template output format, all the data is passed to STDOUT as a
-map[string][]entry where entry is a struct of
-type entry struct { Key string Value interface{} } Which means you can iterate over the map, where the map-key is the secret path and iterate again over the slice of entries in order to access the key and value of the secret (also see assets/template.">
-<meta itemprop=wordCount content="119"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=description content="Applying the following template-snippet to vkvs template-format we can generate vault policies for each path:
+{{ range $path, $data := . }} path &#34;{{ $path }}/*&#34; { capabilities = [ &#34;create&#34;, &#34;read&#34; ] } {{ end }} Demo ">
+<meta itemprop=wordCount content="38"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -45,24 +42,17 @@ type entry struct { Key string Value interface{} } Which means you can iterate o
 </div>
 <div class=content-container>
 <main><h1>Generate Vault policies using the template format</h1>
-<p><code>vkv</code> can be used to generate policies from an existing KV path.
-When using the template output format, all the data is passed to STDOUT as a</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>][]<span style=color:#a6e22e>entry</span>
-</code></pre></div><p>where <code>entry</code> is a struct of</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>entry</span> <span style=color:#66d9ef>struct</span> {
-  <span style=color:#a6e22e>Key</span>   <span style=color:#66d9ef>string</span>
-  <span style=color:#a6e22e>Value</span> <span style=color:#66d9ef>interface</span>{}
+<p>Applying the following template-snippet to vkvs template-format we can generate vault policies for each path:</p>
+<pre tabindex=0><code>{{ range $path, $data := . }}
+path &quot;{{ $path }}/*&quot; {
+    capabilities = [ &quot;create&quot;, &quot;read&quot; ]
 }
-</code></pre></div><p>Which means you can iterate over the map, where the map-key is the secret path and iterate again over the slice of entries in order to access the key and value of the secret (also see <a href=assets/template.tmpl>assets/template.tmpl</a>).</p>
-<p>Knowing this, one can generate Vault policies from an existing KV-engine using the following Go-Template-Snippet:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go>{{ <span style=color:#66d9ef>range</span> <span style=color:#960050;background-color:#1e0010>$</span><span style=color:#a6e22e>path</span>, <span style=color:#960050;background-color:#1e0010>$</span><span style=color:#a6e22e>data</span> <span style=color:#f92672>:=</span> . }}
-<span style=color:#a6e22e>path</span> <span style=color:#e6db74>&#34;{{ $path }}/*&#34;</span> {
-    <span style=color:#a6e22e>capabilities</span> = [ <span style=color:#e6db74>&#34;create&#34;</span>, <span style=color:#e6db74>&#34;read&#34;</span> ]
-}
-{{ <span style=color:#a6e22e>end</span> }}
-</code></pre></div><p>results in:</p>
-<p><img src=../../../images/policies.gif alt></p>
-<div class=edit-meta>
+{{ end }}
+</code></pre><h3 id=demo>Demo</h3>
+<div align=center>
+<br>
+<img src=../../../images/policies.gif alt=drawing width=1000>
+</div><div class=edit-meta>
 <br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/export/advanced_examples/vault_policies.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/export/advanced_examples/diff/ title="Compare and highlight the differences using diff"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Compare and highlight the differences using diff</a>
 <a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/export/advanced_examples/fzf/ title="Show all KV-engines and secrets the using fzf and jq">Next - Show all KV-engines and secrets the using fzf and jq <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>

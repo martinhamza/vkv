@@ -16,7 +16,8 @@
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="Compare and highlight the differences using diff">
 <meta property="og:description" content="vkv can be used to compare secrets across Vault servers or KV engines.
-Here is an example using diff, the | indicates the changed entry per line:">
+&#34;diff -ty <(VKV_PATH='secret' vkv --show-values) <(VKV_PATH='secret_2' vkv --show-values)&#34; Here is an example using diff, the | indicates the changed entry per line:
+Demo  ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/export/advanced_examples/diff/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="export">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
@@ -24,11 +25,13 @@ Here is an example using diff, the | indicates the changed entry per line:">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="Compare and highlight the differences using diff">
 <meta name=twitter:description content="vkv can be used to compare secrets across Vault servers or KV engines.
-Here is an example using diff, the | indicates the changed entry per line:">
+&#34;diff -ty <(VKV_PATH='secret' vkv --show-values) <(VKV_PATH='secret_2' vkv --show-values)&#34; Here is an example using diff, the | indicates the changed entry per line:
+Demo  ">
 <meta itemprop=name content="Compare and highlight the differences using diff">
 <meta itemprop=description content="vkv can be used to compare secrets across Vault servers or KV engines.
-Here is an example using diff, the | indicates the changed entry per line:">
-<meta itemprop=wordCount content="27"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+&#34;diff -ty <(VKV_PATH='secret' vkv --show-values) <(VKV_PATH='secret_2' vkv --show-values)&#34; Here is an example using diff, the | indicates the changed entry per line:
+Demo  ">
+<meta itemprop=wordCount content="36"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -43,8 +46,13 @@ Here is an example using diff, the | indicates the changed entry per line:">
 <div class=content-container>
 <main><h1>Compare and highlight the differences using diff</h1>
 <p><code>vkv</code> can be used to compare secrets across Vault servers or KV engines.</p>
-<p>Here is an example using <code>diff</code>, the <code>|</code> indicates the changed entry per line:</p>
-<p><img src=../../../images/demo.gif alt></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#e6db74>&#34;diff -ty &lt;(VKV_PATH=&#39;secret&#39; vkv --show-values) &lt;(VKV_PATH=&#39;secret_2&#39; vkv --show-values)&#34;</span>
+</code></pre></div><p>Here is an example using <code>diff</code>, the <code>|</code> indicates the changed entry per line:</p>
+<h3 id=demo>Demo</h3>
+<div align=center>
+<br>
+<img src=../../../images/diff.gif alt=drawing width=1000>
+</div>
 <div class=edit-meta>
 <br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/export/advanced_examples/diff.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/export/advanced_examples/ title="Advanced Examples"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Advanced Examples</a>
 <a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/export/advanced_examples/vault_policies/ title="Generate Vault policies using the template format">Next - Generate Vault policies using the template format <i class="fas fa-arrow-right" aria-hidden=true></i></a>

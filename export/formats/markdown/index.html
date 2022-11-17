@@ -15,17 +15,20 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="Markdown">
-<meta property="og:description" content>
+<meta property="og:description" content="Display the secrets recursively as a markdown table
+Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/export/formats/markdown/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="export">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="Markdown">
-<meta name=twitter:description content>
+<meta name=twitter:description content="Display the secrets recursively as a markdown table
+Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
 <meta itemprop=name content="Markdown">
-<meta itemprop=description content>
-<meta itemprop=wordCount content="0"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=description content="Display the secrets recursively as a markdown table
+Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
+<meta itemprop=wordCount content="52"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -39,7 +42,51 @@
 </div>
 <div class=content-container>
 <main><h1>Markdown</h1>
-<p><img src=../../../images/fzf.gif alt></p>
+<p>Display the secrets recursively as a markdown table</p>
+<h3 id=required-flags>Required flags</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv --path &lt;path&gt; --format<span style=color:#f92672>=</span>markdown
+</code></pre></div><h3 id=optional-flags>Optional flags</h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+<th>Env</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--only-keys</code></td>
+<td>show only keys</td>
+<td><code>VKV_ONLY_KEYS</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>--only-paths</code></td>
+<td>show only paths</td>
+<td><code>VKV_ONLY_PATHS</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>--show-values</code></td>
+<td>don&rsquo;t mask values</td>
+<td><code>VKV_SHOW_VALUES</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>--max-value-length</code></td>
+<td>maximum char length of values (set to <code>-1</code> for disabling)</td>
+<td><code>VKV_MAX_VALUE_LENGTH</code></td>
+<td><code>12</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id=demo>Demo</h3>
+<div align=center>
+<br>
+<img src=../../../images/markdown.gif alt=drawing width=1000>
+</div>
 <div class=edit-meta>
 <br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/export/formats/markdown.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/export/formats/yaml/ title=YAML><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - YAML</a>
 <a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/export/formats/token_policy/ title="Token Policy Matrix">Next - Token Policy Matrix <i class="fas fa-arrow-right" aria-hidden=true></i></a>

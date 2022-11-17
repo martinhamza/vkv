@@ -15,17 +15,29 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="Template">
-<meta property="og:description" content>
+<meta property="og:description" content="Template the secrets using Go-Template-Syntax.
+When using the template output format, all the data is passed to STDOUT as a
+map[string][]entry where entry is a struct of
+type entry struct { Key string Value interface{} } Also see Generate Vault Policies from a KV engine.
+Required flags vkv --path <path> --format=template Optional flags    Flag Description Env Default     --template-file path to a file containing Go-template syntax to render the KV entries VKV_TEMPLATE_FILE    --template-string string containing Go-template syntax to render KV entries VKV_TEMPLATE_STRING     Demo ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/export/formats/template/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="export">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="Template">
-<meta name=twitter:description content>
+<meta name=twitter:description content="Template the secrets using Go-Template-Syntax.
+When using the template output format, all the data is passed to STDOUT as a
+map[string][]entry where entry is a struct of
+type entry struct { Key string Value interface{} } Also see Generate Vault Policies from a KV engine.
+Required flags vkv --path <path> --format=template Optional flags    Flag Description Env Default     --template-file path to a file containing Go-template syntax to render the KV entries VKV_TEMPLATE_FILE    --template-string string containing Go-template syntax to render KV entries VKV_TEMPLATE_STRING     Demo ">
 <meta itemprop=name content="Template">
-<meta itemprop=description content>
-<meta itemprop=wordCount content="0"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=description content="Template the secrets using Go-Template-Syntax.
+When using the template output format, all the data is passed to STDOUT as a
+map[string][]entry where entry is a struct of
+type entry struct { Key string Value interface{} } Also see Generate Vault Policies from a KV engine.
+Required flags vkv --path <path> --format=template Optional flags    Flag Description Env Default     --template-file path to a file containing Go-template syntax to render the KV entries VKV_TEMPLATE_FILE    --template-string string containing Go-template syntax to render KV entries VKV_TEMPLATE_STRING     Demo ">
+<meta itemprop=wordCount content="82"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -39,8 +51,47 @@
 </div>
 <div class=content-container>
 <main><h1>Template</h1>
-<p><img src=../../../images/fzf.gif alt></p>
-<div class=edit-meta>
+<p>Template the secrets using <a href=https://pkg.go.dev/text/template>Go-Template-Syntax</a>.</p>
+<p>When using the template output format, all the data is passed to STDOUT as a</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>][]<span style=color:#a6e22e>entry</span>
+</code></pre></div><p>where entry is a struct of</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>entry</span> <span style=color:#66d9ef>struct</span> {
+  <span style=color:#a6e22e>Key</span>   <span style=color:#66d9ef>string</span>
+  <span style=color:#a6e22e>Value</span> <span style=color:#66d9ef>interface</span>{}
+}
+</code></pre></div><p>Also see <a href=https://falcosuessgott.github.io/vkv/export/advanced_examples/vault_policies/>Generate Vault Policies from a KV engine</a>.</p>
+<h3 id=required-flags>Required flags</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv --path &lt;path&gt; --format<span style=color:#f92672>=</span>template
+</code></pre></div><h3 id=optional-flags>Optional flags</h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+<th>Env</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--template-file</code></td>
+<td>path to a file containing Go-template syntax to render the KV entries</td>
+<td><code>VKV_TEMPLATE_FILE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--template-string</code></td>
+<td>string containing Go-template syntax to render KV entries</td>
+<td><code>VKV_TEMPLATE_STRING</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id=demo>Demo</h3>
+<div align=center>
+<br>
+<img src=../../../images/template.gif alt=drawing width=1000>
+</div><div class=edit-meta>
 <br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/export/formats/template.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/export/formats/export/ title=Export><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Export</a>
 <a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/export/advanced_examples/ title="Advanced Examples">Next - Advanced Examples <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>

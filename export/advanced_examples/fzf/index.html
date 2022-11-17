@@ -15,17 +15,23 @@
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="Show all KV-engines and secrets the using fzf and jq">
-<meta property="og:description" content="using vault secrets list and a little bit of jq-logic (see assets/fzf.sh) we can get a list of all KV-engines visible for the token. If we pipe this into fzf we can get a handy little preview-app:">
+<meta property="og:description" content="using vault secrets list and a little bit of jq-logic, we can get a list of all KV-engines visible for the token.
+If we pipe this into fzf we can get a handy little preview-app:
+vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#34;kv&#34;)) | from_entries | keys[]' | fzf --preview 'vkv -p ${}' Demo ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/export/advanced_examples/fzf/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="export">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="Show all KV-engines and secrets the using fzf and jq">
-<meta name=twitter:description content="using vault secrets list and a little bit of jq-logic (see assets/fzf.sh) we can get a list of all KV-engines visible for the token. If we pipe this into fzf we can get a handy little preview-app:">
+<meta name=twitter:description content="using vault secrets list and a little bit of jq-logic, we can get a list of all KV-engines visible for the token.
+If we pipe this into fzf we can get a handy little preview-app:
+vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#34;kv&#34;)) | from_entries | keys[]' | fzf --preview 'vkv -p ${}' Demo ">
 <meta itemprop=name content="Show all KV-engines and secrets the using fzf and jq">
-<meta itemprop=description content="using vault secrets list and a little bit of jq-logic (see assets/fzf.sh) we can get a list of all KV-engines visible for the token. If we pipe this into fzf we can get a handy little preview-app:">
-<meta itemprop=wordCount content="37"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=description content="using vault secrets list and a little bit of jq-logic, we can get a list of all KV-engines visible for the token.
+If we pipe this into fzf we can get a handy little preview-app:
+vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#34;kv&#34;)) | from_entries | keys[]' | fzf --preview 'vkv -p ${}' Demo ">
+<meta itemprop=wordCount content="56"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -39,9 +45,14 @@
 </div>
 <div class=content-container>
 <main><h1>Show all KV-engines and secrets the using fzf and jq</h1>
-<p>using <code>vault secrets list</code> and a little bit of <code>jq</code>-logic (see <a href=assets/fzf.sh>assets/fzf.sh</a>) we can get a list of all KV-engines visible for the token. If we pipe this into <code>fzf</code> we can get a handy little preview-app:</p>
-<p><img src=../../../images/fzf.gif alt></p>
-<div class=edit-meta>
+<p>using <code>vault secrets list</code> and a little bit of <code>jq</code>-logic, we can get a list of all KV-engines visible for the token.</p>
+<p>If we pipe this into <code>fzf</code> we can get a handy little preview-app:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vault secrets list -format<span style=color:#f92672>=</span>json | jq -r <span style=color:#e6db74>&#39;to_entries | map(select(.value.type==&#34;kv&#34;)) | from_entries | keys[]&#39;</span> | fzf --preview <span style=color:#e6db74>&#39;vkv -p ${}&#39;</span>
+</code></pre></div><h3 id=demo>Demo</h3>
+<div align=center>
+<br>
+<img src=../../../images/fzf.gif alt=drawing width=1000>
+</div><div class=edit-meta>
 <br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/export/advanced_examples/fzf.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/export/advanced_examples/vault_policies/ title="Generate Vault policies using the template format"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Generate Vault policies using the template format</a>
 <a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/import/ title="Secret Import">Next - Secret Import <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
