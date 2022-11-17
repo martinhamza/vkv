@@ -16,7 +16,7 @@
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="Usage">
 <meta property="og:description" content="The - in vkv import -, tells vkv do read data via STDIN. The idea of vkv import - is, in order to copy/mirror KV-v2 secrets or complete engines across diferrent Vault Servers or Namespaces, you can simply pipe vkvs output into the vkv import command:
-# dont forget to use --show-values, otherwise the secrets will be uploaded masked. vkv -p <source> --show-values -f=yaml | vkv import - -p <destination> A few notes:  <source> and <destination> dont have to be the root path of a secret engine, you also specify subpaths and copy them another secret engine.">
+# dont forget to use --show-values, otherwise the secrets will be uploaded masked. vkv -p <source> --show-values -f=yaml | vkv import - -p <destination> Demo  A few notes:  <source> and <destination> dont have to be the root path of a secret engine, you also specify subpaths and copy them another secret engine.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/import/usage/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="import">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
@@ -24,11 +24,11 @@
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="Usage">
 <meta name=twitter:description content="The - in vkv import -, tells vkv do read data via STDIN. The idea of vkv import - is, in order to copy/mirror KV-v2 secrets or complete engines across diferrent Vault Servers or Namespaces, you can simply pipe vkvs output into the vkv import command:
-# dont forget to use --show-values, otherwise the secrets will be uploaded masked. vkv -p <source> --show-values -f=yaml | vkv import - -p <destination> A few notes:  <source> and <destination> dont have to be the root path of a secret engine, you also specify subpaths and copy them another secret engine.">
+# dont forget to use --show-values, otherwise the secrets will be uploaded masked. vkv -p <source> --show-values -f=yaml | vkv import - -p <destination> Demo  A few notes:  <source> and <destination> dont have to be the root path of a secret engine, you also specify subpaths and copy them another secret engine.">
 <meta itemprop=name content="Usage">
 <meta itemprop=description content="The - in vkv import -, tells vkv do read data via STDIN. The idea of vkv import - is, in order to copy/mirror KV-v2 secrets or complete engines across diferrent Vault Servers or Namespaces, you can simply pipe vkvs output into the vkv import command:
-# dont forget to use --show-values, otherwise the secrets will be uploaded masked. vkv -p <source> --show-values -f=yaml | vkv import - -p <destination> A few notes:  <source> and <destination> dont have to be the root path of a secret engine, you also specify subpaths and copy them another secret engine.">
-<meta itemprop=wordCount content="248"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+# dont forget to use --show-values, otherwise the secrets will be uploaded masked. vkv -p <source> --show-values -f=yaml | vkv import - -p <destination> Demo  A few notes:  <source> and <destination> dont have to be the root path of a secret engine, you also specify subpaths and copy them another secret engine.">
+<meta itemprop=wordCount content="249"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -46,7 +46,11 @@
 <code>vkv</code>s output into the <code>vkv import</code> command:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash> <span style=color:#75715e># dont forget to use --show-values, otherwise the secrets will be uploaded masked.</span>
 vkv -p &lt;source&gt; --show-values -f<span style=color:#f92672>=</span>yaml | vkv import - -p &lt;destination&gt;
-</code></pre></div><h3 id=a-few-notes>A few notes:</h3>
+</code></pre></div><h3 id=demo>Demo</h3>
+<div align=center>
+<img src=../../images/export-import.gif alt=drawing width=1000>
+</div>
+<h3 id=a-few-notes>A few notes:</h3>
 <ul>
 <li><code>&lt;source></code> and <code>&lt;destination></code> dont have to be the root path of a secret engine, you also specify subpaths and copy them another secret engine.</li>
 <li><code>vkv</code> will error if the enabled secret engine already exist, you can use <code>--force</code> to overwrite the destination engine, if the destination path contains a subpath (<code>root/sub</code>), <code>vkv</code> will then insert the secrets to that specific directory</li>
