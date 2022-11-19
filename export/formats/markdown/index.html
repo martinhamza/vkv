@@ -16,7 +16,7 @@
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="Markdown">
 <meta property="og:description" content="Display the secrets recursively as a markdown table
-Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
+Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --show-version show the secrets version VKV_SHOW_VERSION true   --show-metadata show the secrets custom metadata VKV_SHOW_METADATA true   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/export/formats/markdown/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="export">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
@@ -24,11 +24,11 @@ Required flags vkv --path <path> --format=markdown Optional flags    Flag Descri
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="Markdown">
 <meta name=twitter:description content="Display the secrets recursively as a markdown table
-Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
+Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --show-version show the secrets version VKV_SHOW_VERSION true   --show-metadata show the secrets custom metadata VKV_SHOW_METADATA true   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
 <meta itemprop=name content="Markdown">
 <meta itemprop=description content="Display the secrets recursively as a markdown table
-Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
-<meta itemprop=wordCount content="52"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+Required flags vkv --path <path> --format=markdown Optional flags    Flag Description Env Default     --only-keys show only keys VKV_ONLY_KEYS false   --only-paths show only paths VKV_ONLY_PATHS false   --show-values don&rsquo;t mask values VKV_SHOW_VALUES false   --show-version show the secrets version VKV_SHOW_VERSION true   --show-metadata show the secrets custom metadata VKV_SHOW_METADATA true   --max-value-length maximum char length of values (set to -1 for disabling) VKV_MAX_VALUE_LENGTH 12    Demo  ">
+<meta itemprop=wordCount content="67"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.1.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -73,6 +73,18 @@ Required flags vkv --path <path> --format=markdown Optional flags    Flag Descri
 <td>don&rsquo;t mask values</td>
 <td><code>VKV_SHOW_VALUES</code></td>
 <td><code>false</code></td>
+</tr>
+<tr>
+<td><code>--show-version</code></td>
+<td>show the secrets version</td>
+<td><code>VKV_SHOW_VERSION</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>--show-metadata</code></td>
+<td>show the secrets custom metadata</td>
+<td><code>VKV_SHOW_METADATA</code></td>
+<td><code>true</code></td>
 </tr>
 <tr>
 <td><code>--max-value-length</code></td>

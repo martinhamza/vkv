@@ -43,16 +43,20 @@
 <img src=https://codecov.io/gh/FalcoSuessgott/vkv/branch/master/graph/badge.svg alt=drawing>
 <img src=https://img.shields.io/github/downloads/FalcoSuessgott/vkv/total.svg alt=drawing>
 <img src=https://img.shields.io/github/v/release/FalcoSuessgott/vkv alt=drawing>
-<p><code>vkv</code> is a highly tested, little CLI tool written in Go, which lets you export and import
-secrets from a <a href=https://developer.hashicorp.com/vault/docs/secrets/kv/kv-v2>HashiCorp Vault KV-v2 engine</a>:
-<br>
-<br></p>
+<p><code>vkv</code> is a little CLI tool written in Go, which enables you to list, compare, import, document, backup & encrypt secrets from a <a href=https://developer.hashicorp.com/vault/docs/secrets/kv/kv-v2>HashiCorp Vault KV-v2 engine</a>:</p>
 <img src=https://media.githubusercontent.com/media/FalcoSuessgott/vkv/master/www/static/images/demo.gif alt=drawing width=1000>
-<p><code>vkv</code> allows you to recursively list secrets from any KV-v2 engine in various useful <a href=https://falcosuessgott.github.io/vkv/export/formats/>output formats</a>. Meanwhile <code>vkv import</code> takes <code>vkv</code>&rsquo;s <code>JSON</code> or <code>YAML</code> output and writes its secrets to the specified KV-v2 engine. You can even copy KV sub-paths into already existing secret engines.
-<br>
-<br>
-Checkout the <a href=https://falcosuessgott.github.io/vkv/export/advanced_examples/>Advanced Examples</a> section to learn more handy <code>vkv</code> snippets.</p>
 </div>
+<h3 id=features>Features</h3>
+<ul>
+<li>recursively print secrets of any KVv2 Engine in <code>json</code>, <code>yaml</code>, <code>markdown</code> and <a href=https://falcosuessgott.github.io/vkv/export/formats/>other formats</a></li>
+<li>show a secret version as well as its <a href=https://developer.hashicorp.com/vault/docs/commands/kv/metadata>custom metadata</a></li>
+<li>customize the output (show only-keys, only-paths, mask/unmask secrets) via <a href=https://falcosuessgott.github.io/vkv/export/usage/>flags or environment</a></li>
+<li>print the CRUD-capabilities of the authenticated token for each KV-path (format: <a href=https://falcosuessgott.github.io/vkv/export/formats/token_policy/><code>policy</code></a>)</li>
+<li>print secrets in <code>export &lt;key>=&lt;value></code> format for variable exporting (format: <a href=https://falcosuessgott.github.io/vkv/export/formats/export/><code>export</code></a>)</li>
+<li><a href=https://falcosuessgott.github.io/vkv/import/usage/>import</a> secrets back to Vault from <code>vkv</code>&rsquo;s <code>json</code> or <code>yaml</code> format</li>
+<li>handy <a href=https://falcosuessgott.github.io/vkv/export/advanced_examples/>snippets</a> for managing KVv2 engines using <code>fzf</code>, <code>sops</code> & <code>diff</code></li>
+</ul>
+<p>Checkout the <a href=https://falcosuessgott.github.io/vkv/>Docs</a> to learn more about <code>vkv</code></p>
 <nav class=pagination><a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/installation/ title=Installation>Next - Installation <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><div class=edit-meta>
 <br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
