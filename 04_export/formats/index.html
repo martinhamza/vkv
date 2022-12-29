@@ -1,0 +1,187 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>output formats - vkv</title>
+<meta name=description content="the swiss army knife when working with Vault KVv2 engines">
+<meta name=generator content="Hugo 0.92.2">
+<link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/04_export/formats/>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
+<script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
+<script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
+<meta property="og:title" content="output formats">
+<meta property="og:description" content="base vkv export -p secret -f=base secret/ ├── v1: admin [key=value] │ └── sub=******** ├── v1: demo │ └── foo=*** └── sub/ ├── v1: demo │ ├── demo=*********** │ ├── password=****** │ └── user=***** └── sub2 └── v2: demo [admin=false key=value] ├── admin=*** ├── foo=*** ├── password=******** └── user=**** yaml vkv export -p secret -f=yaml secret/: admin: sub: '********' demo: foo: '***' sub/: demo: demo: '***********' password: '******' user: '*****' sub2/: demo: admin: '***' foo: '***' password: '********' user: '****' json vkv export -p secret -f=json { &#34;secret/&#34;: { &#34;admin&#34;: { &#34;sub&#34;: &#34;********&#34; }, &#34;demo&#34;: { &#34;foo&#34;: &#34;***&#34; }, &#34;sub/&#34;: { &#34;demo&#34;: { &#34;demo&#34;: &#34;***********&#34;, &#34;password&#34;: &#34;******&#34;, &#34;user&#34;: &#34;*****&#34; }, &#34;sub2/&#34;: { &#34;demo&#34;: { &#34;admin&#34;: &#34;***&#34;, &#34;foo&#34;: &#34;***&#34;, &#34;password&#34;: &#34;********&#34;, &#34;user&#34;: &#34;****&#34; } } } } } export vkv export -p secret -f=export export admin='key' export demo='hello world' export foo='bar' export password='password' export sub='password' eval $(vkv export -p secret -f=export) echo $admin key policy vkv export -p secret -f=policy PATH CREATE READ UPDATE DELETE LIST ROOT secret/sub/sub2/demo ✖ ✖ ✖ ✖ ✖ ✔ secret/admin ✖ ✖ ✖ ✖ ✖ ✔ secret/demo ✖ ✖ ✖ ✖ ✖ ✔ secret/sub/demo ✖ ✖ ✖ ✖ ✖ ✔ markdown vkv export -p secret -f=markdown | PATH | KEY | VALUE | VERSION | METADATA | |----------------------|----------|-------------|---------|-----------------------| | secret/admin | sub | ******** | 1 | key=value | | secret/demo | foo | *** | 1 | | | secret/sub/demo | demo | *********** | 1 | | | | password | ****** | | | | | user | ***** | | | | secret/sub/sub2/demo | admin | *** | 2 | admin=false key=value | | | foo | *** | | | | | password | ******** | | | | | user | **** | | | ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/04_export/formats/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="04_export">
+<meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta name=twitter:title content="output formats">
+<meta name=twitter:description content="base vkv export -p secret -f=base secret/ ├── v1: admin [key=value] │ └── sub=******** ├── v1: demo │ └── foo=*** └── sub/ ├── v1: demo │ ├── demo=*********** │ ├── password=****** │ └── user=***** └── sub2 └── v2: demo [admin=false key=value] ├── admin=*** ├── foo=*** ├── password=******** └── user=**** yaml vkv export -p secret -f=yaml secret/: admin: sub: '********' demo: foo: '***' sub/: demo: demo: '***********' password: '******' user: '*****' sub2/: demo: admin: '***' foo: '***' password: '********' user: '****' json vkv export -p secret -f=json { &#34;secret/&#34;: { &#34;admin&#34;: { &#34;sub&#34;: &#34;********&#34; }, &#34;demo&#34;: { &#34;foo&#34;: &#34;***&#34; }, &#34;sub/&#34;: { &#34;demo&#34;: { &#34;demo&#34;: &#34;***********&#34;, &#34;password&#34;: &#34;******&#34;, &#34;user&#34;: &#34;*****&#34; }, &#34;sub2/&#34;: { &#34;demo&#34;: { &#34;admin&#34;: &#34;***&#34;, &#34;foo&#34;: &#34;***&#34;, &#34;password&#34;: &#34;********&#34;, &#34;user&#34;: &#34;****&#34; } } } } } export vkv export -p secret -f=export export admin='key' export demo='hello world' export foo='bar' export password='password' export sub='password' eval $(vkv export -p secret -f=export) echo $admin key policy vkv export -p secret -f=policy PATH CREATE READ UPDATE DELETE LIST ROOT secret/sub/sub2/demo ✖ ✖ ✖ ✖ ✖ ✔ secret/admin ✖ ✖ ✖ ✖ ✖ ✔ secret/demo ✖ ✖ ✖ ✖ ✖ ✔ secret/sub/demo ✖ ✖ ✖ ✖ ✖ ✔ markdown vkv export -p secret -f=markdown | PATH | KEY | VALUE | VERSION | METADATA | |----------------------|----------|-------------|---------|-----------------------| | secret/admin | sub | ******** | 1 | key=value | | secret/demo | foo | *** | 1 | | | secret/sub/demo | demo | *********** | 1 | | | | password | ****** | | | | | user | ***** | | | | secret/sub/sub2/demo | admin | *** | 2 | admin=false key=value | | | foo | *** | | | | | password | ******** | | | | | user | **** | | | ">
+<meta itemprop=name content="output formats">
+<meta itemprop=description content="base vkv export -p secret -f=base secret/ ├── v1: admin [key=value] │ └── sub=******** ├── v1: demo │ └── foo=*** └── sub/ ├── v1: demo │ ├── demo=*********** │ ├── password=****** │ └── user=***** └── sub2 └── v2: demo [admin=false key=value] ├── admin=*** ├── foo=*** ├── password=******** └── user=**** yaml vkv export -p secret -f=yaml secret/: admin: sub: '********' demo: foo: '***' sub/: demo: demo: '***********' password: '******' user: '*****' sub2/: demo: admin: '***' foo: '***' password: '********' user: '****' json vkv export -p secret -f=json { &#34;secret/&#34;: { &#34;admin&#34;: { &#34;sub&#34;: &#34;********&#34; }, &#34;demo&#34;: { &#34;foo&#34;: &#34;***&#34; }, &#34;sub/&#34;: { &#34;demo&#34;: { &#34;demo&#34;: &#34;***********&#34;, &#34;password&#34;: &#34;******&#34;, &#34;user&#34;: &#34;*****&#34; }, &#34;sub2/&#34;: { &#34;demo&#34;: { &#34;admin&#34;: &#34;***&#34;, &#34;foo&#34;: &#34;***&#34;, &#34;password&#34;: &#34;********&#34;, &#34;user&#34;: &#34;****&#34; } } } } } export vkv export -p secret -f=export export admin='key' export demo='hello world' export foo='bar' export password='password' export sub='password' eval $(vkv export -p secret -f=export) echo $admin key policy vkv export -p secret -f=policy PATH CREATE READ UPDATE DELETE LIST ROOT secret/sub/sub2/demo ✖ ✖ ✖ ✖ ✖ ✔ secret/admin ✖ ✖ ✖ ✖ ✖ ✔ secret/demo ✖ ✖ ✖ ✖ ✖ ✔ secret/sub/demo ✖ ✖ ✖ ✖ ✖ ✔ markdown vkv export -p secret -f=markdown | PATH | KEY | VALUE | VERSION | METADATA | |----------------------|----------|-------------|---------|-----------------------| | secret/admin | sub | ******** | 1 | key=value | | secret/demo | foo | *** | 1 | | | secret/sub/demo | demo | *********** | 1 | | | | password | ****** | | | | | user | ***** | | | | secret/sub/sub2/demo | admin | *** | 2 | admin=false key=value | | | foo | *** | | | | | password | ******** | | | | | user | **** | | | ">
+<meta itemprop=wordCount content="295"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=keywords content></head>
+<body><div class=container><header>
+<h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
+<p class=description>the swiss army knife when working with Vault KVv2 engines</p>
+</header>
+<div class=global-menu>
+<nav>
+<ul>
+<li id=home><a href=/vkv/></a></li></ul>
+</nav>
+</div>
+<div class=content-container>
+<main><h1>output formats</h1>
+<h3 id=base>base</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>base               
+secret/
+├── v1: admin <span style=color:#f92672>[</span>key<span style=color:#f92672>=</span>value<span style=color:#f92672>]</span>
+│   └── sub<span style=color:#f92672>=</span>********
+├── v1: demo
+│   └── foo<span style=color:#f92672>=</span>***
+└── sub/
+    ├── v1: demo
+    │   ├── demo<span style=color:#f92672>=</span>***********
+    │   ├── password<span style=color:#f92672>=</span>******
+    │   └── user<span style=color:#f92672>=</span>*****
+    └── sub2
+        └── v2: demo <span style=color:#f92672>[</span>admin<span style=color:#f92672>=</span>false key<span style=color:#f92672>=</span>value<span style=color:#f92672>]</span>
+            ├── admin<span style=color:#f92672>=</span>***
+            ├── foo<span style=color:#f92672>=</span>***
+            ├── password<span style=color:#f92672>=</span>********
+            └── user<span style=color:#f92672>=</span>****
+</code></pre></div><h3 id=yaml>yaml</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash> vkv export -p secret -f<span style=color:#f92672>=</span>yaml                       
+secret/:
+  admin:
+    sub: <span style=color:#e6db74>&#39;********&#39;</span>
+  demo:
+    foo: <span style=color:#e6db74>&#39;***&#39;</span>
+  sub/:
+    demo:
+      demo: <span style=color:#e6db74>&#39;***********&#39;</span>
+      password: <span style=color:#e6db74>&#39;******&#39;</span>
+      user: <span style=color:#e6db74>&#39;*****&#39;</span>
+    sub2/:
+      demo:
+        admin: <span style=color:#e6db74>&#39;***&#39;</span>
+        foo: <span style=color:#e6db74>&#39;***&#39;</span>
+        password: <span style=color:#e6db74>&#39;********&#39;</span>
+        user: <span style=color:#e6db74>&#39;****&#39;</span>
+</code></pre></div><h3 id=json>json</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>json
+<span style=color:#f92672>{</span>
+  <span style=color:#e6db74>&#34;secret/&#34;</span>: <span style=color:#f92672>{</span>
+    <span style=color:#e6db74>&#34;admin&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;sub&#34;</span>: <span style=color:#e6db74>&#34;********&#34;</span>
+    <span style=color:#f92672>}</span>,
+    <span style=color:#e6db74>&#34;demo&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;foo&#34;</span>: <span style=color:#e6db74>&#34;***&#34;</span>
+    <span style=color:#f92672>}</span>,
+    <span style=color:#e6db74>&#34;sub/&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;demo&#34;</span>: <span style=color:#f92672>{</span>
+        <span style=color:#e6db74>&#34;demo&#34;</span>: <span style=color:#e6db74>&#34;***********&#34;</span>,
+        <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;******&#34;</span>,
+        <span style=color:#e6db74>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;*****&#34;</span>
+      <span style=color:#f92672>}</span>,
+      <span style=color:#e6db74>&#34;sub2/&#34;</span>: <span style=color:#f92672>{</span>
+        <span style=color:#e6db74>&#34;demo&#34;</span>: <span style=color:#f92672>{</span>
+          <span style=color:#e6db74>&#34;admin&#34;</span>: <span style=color:#e6db74>&#34;***&#34;</span>,
+          <span style=color:#e6db74>&#34;foo&#34;</span>: <span style=color:#e6db74>&#34;***&#34;</span>,
+          <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;********&#34;</span>,
+          <span style=color:#e6db74>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;****&#34;</span>
+        <span style=color:#f92672>}</span>
+      <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+  <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><h3 id=export>export</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>export
+export admin<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;key&#39;</span>
+export demo<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;hello world&#39;</span>
+export foo<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;bar&#39;</span>
+export password<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;password&#39;</span>
+export sub<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;password&#39;</span>
+
+eval <span style=color:#66d9ef>$(</span>vkv export -p secret -f<span style=color:#f92672>=</span>export<span style=color:#66d9ef>)</span>
+echo $admin
+key
+</code></pre></div><h3 id=policy>policy</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash> vkv export -p secret -f<span style=color:#f92672>=</span>policy 
+PATH                    CREATE  READ    UPDATE  DELETE  LIST    ROOT
+secret/sub/sub2/demo    ✖       ✖       ✖       ✖       ✖       ✔
+secret/admin            ✖       ✖       ✖       ✖       ✖       ✔
+secret/demo             ✖       ✖       ✖       ✖       ✖       ✔
+secret/sub/demo         ✖       ✖       ✖       ✖       ✖       ✔
+</code></pre></div><h3 id=markdown>markdown</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>markdown      
+|         PATH         |   KEY    |    VALUE    | VERSION |       METADATA        |
+|----------------------|----------|-------------|---------|-----------------------|
+| secret/admin         | sub      | ********    |       <span style=color:#ae81ff>1</span> | key<span style=color:#f92672>=</span>value             |
+| secret/demo          | foo      | ***         |       <span style=color:#ae81ff>1</span> |                       |
+| secret/sub/demo      | demo     | *********** |       <span style=color:#ae81ff>1</span> |                       |
+|                      | password | ******      |         |                       |
+|                      | user     | *****       |         |                       |
+| secret/sub/sub2/demo | admin    | ***         |       <span style=color:#ae81ff>2</span> | admin<span style=color:#f92672>=</span>false key<span style=color:#f92672>=</span>value |
+|                      | foo      | ***         |         |                       |
+|                      | password | ********    |         |                       |
+|                      | user     | ****        |         |                       |
+</code></pre></div><div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/04_export/formats.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/04_export/ title="vkv export"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - vkv export</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/05_import/ title="vkv import ">Next - vkv import <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+</nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
+</footer>
+</main>
+<div class=sidebar>
+<nav class=slide-menu>
+<ul>
+<li><a href=https://falcosuessgott.github.io/vkv/>Home</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/01_quickstart/>Quickstart</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/02_installation/>Installation</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/03_authentication/>Authentication</a>
+</li>
+<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/04_export/>vkv export<span class="mark opened">-</span></a>
+<ul class=sub-menu>
+<li class=active><a href=https://falcosuessgott.github.io/vkv/04_export/formats/>output formats</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/05_import/>vkv import </a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/06_02_snapshot_restore/>vkv snapshot restore</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/06_01_snapshot_save/>vkv snapshot save</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/07_02_list_engines/>vkv list engines</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/07_01_list_namespaces/>vkv list namespaces</a>
+</li>
+<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/>Advanced Examples<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/diff/>compare KVv2 engines</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/fzf/>browse all KVv2 engines</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/sops/>encrypt & decrypt using sops</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/09_development/>Development</a>
+</li>
+</ul>
+</nav>
+<div class=sidebar-footer></div>
+</div>
+</div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20>
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Quickstart - vkv</title>
+<meta name=description content="the swiss army knife when working with Vault KVv2 engines">
+<meta name=generator content="Hugo 0.92.2">
+<link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/01_quickstart/>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
+<script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
+<script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
+<meta property="og:title" content="Quickstart">
+<meta property="og:description" content="the swiss army knife when working with Vault KVv2 engines">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/01_quickstart/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta name=twitter:title content="Quickstart">
+<meta name=twitter:description content="the swiss army knife when working with Vault KVv2 engines">
+<meta itemprop=name content="Quickstart">
+<meta itemprop=description content="the swiss army knife when working with Vault KVv2 engines"></head>
+<body><div class=container><header>
+<h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
+<p class=description>the swiss army knife when working with Vault KVv2 engines</p>
+</header>
+<div class=global-menu>
+<nav>
+<ul>
+<li id=home><a href=/vkv/></a></li></ul>
+</nav>
+</div>
+<div class=content-container>
+<main><h1>Quickstart</h1><p>This guide will run you through some of the features of <code>vkv</code>.</p>
+<h3 id=0-prerequsuites>0. Prerequsuites</h3>
+<p>In order to perform all of the described tasks, you will need the following tools:</p>
+<ul>
+<li>a Linux/MacOS Shell</li>
+<li><code>docker</code> installed and running (alternatively <code>vault</code> CLI can be used)</li>
+<li><code>vkv</code> installed (follow <a href=https://falcosuessgott.github.io/vkv/installation/>https://falcosuessgott.github.io/vkv/installation/</a>)</li>
+</ul>
+<h3 id=01-spin-up-a-development-vault-server>01. Spin up a development Vault server</h3>
+<p>First, we setup a development Vault server.</p>
+<p>Open a terminal and run:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run -p 8200:8200 hashicorp/vault server -dev -dev-root-token-id<span style=color:#f92672>=</span>root
+</code></pre></div><p>You should then be able to visit <code>http://127.0.0.1:8200</code> in your browser and see a Vault login page.</p>
+<p>The <code>root</code> token is <code>root</code>.</p>
+<h3 id=02-verify-connection>02. Verify connection</h3>
+<p>Once you have exported the required environment variables, you can verify your connection with the vault CLI by running:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>export VAULT_ADDR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;http://127.0.0.1:8200&#34;</span>
+export VAULT_TOKEN<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;root&#34;</span>
+vault status
+Key             Value
+---             -----
+Seal Type       shamir
+Initialized     true
+Sealed          false
+Total Shares    <span style=color:#ae81ff>1</span>
+Threshold       <span style=color:#ae81ff>1</span>
+Version         1.12.1
+Build Date      2022-10-27T12:32:05Z
+Storage Type    inmem
+Cluster Name    vault-cluster-1bbeabe8
+Cluster ID      405e99ab-5f8c-18ca-dafb-228c91add2f4
+HA Enabled      false
+</code></pre></div><p>If <code>vault status</code> returned an output like this you good to go to the next step</p>
+<h3 id=03-write-secrets-to-vault-using-vault>03. Write secrets to Vault using <code>vault</code></h3>
+<p>In a development Vault server a <code>KVv2</code> under <code>secret/</code> is enabled by default.
+We want to write some secrets using <code>vault</code>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vault kv put -mount<span style=color:#f92672>=</span>secret admin username<span style=color:#f92672>=</span>user password<span style=color:#f92672>=</span>passw0rd
+vault kv metadata put -mount<span style=color:#f92672>=</span>secret -custom-metadata<span style=color:#f92672>=</span>key<span style=color:#f92672>=</span>value admin
+vault kv put -mount<span style=color:#f92672>=</span>secret db/prod env<span style=color:#f92672>=</span>prod username<span style=color:#f92672>=</span>user password<span style=color:#f92672>=</span>passw0rd-prod
+vault kv put -mount<span style=color:#f92672>=</span>secret db/dev env<span style=color:#f92672>=</span>dev username<span style=color:#f92672>=</span>user password<span style=color:#f92672>=</span>passw0rd-dev
+</code></pre></div><h3 id=04-list-secrets-using-vkv>04. List secrets using <code>vkv</code></h3>
+<p><code>vkv</code> requires atleast <code>VAULT_ADDR</code> and <code>VAULT_TOKEN</code> if the <code>vault status</code> command works, <code>vkv</code> will also work.</p>
+<p>We can now use <code>vkv</code> to list all of our secrets recursively:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export --path secret                                            
+secret/
+├── v1: admin <span style=color:#f92672>[</span>key<span style=color:#f92672>=</span>value<span style=color:#f92672>]</span>
+│   ├── password<span style=color:#f92672>=</span>********
+│   └── username<span style=color:#f92672>=</span>****
+└── db/
+    ├── v1: dev
+    │   ├── env<span style=color:#f92672>=</span>***
+    │   ├── password<span style=color:#f92672>=</span>************
+    │   └── username<span style=color:#f92672>=</span>****
+    └── v1: prod
+        ├── env<span style=color:#f92672>=</span>****
+        ├── password<span style=color:#f92672>=</span>************
+        └── username<span style=color:#f92672>=</span>****
+</code></pre></div><p>Here are some explanations:</p>
+<ul>
+<li><code>vkv</code> masks the secrets per default, you can disable this by using <code>--show-values</code> or <code>VKV_EXPORT_SHOW_VALUES=true</code></li>
+<li><code>vkv</code> limits the length of the secrets per default to <code>12</code> for readability purposes (You can set you own value length by using <code>--max-value-length=XX</code> or <code>VKV_EXPORT_MAX_VALUE_LENGTH=XX</code>)</li>
+<li><code>v1</code> indicates the secret version (disable by using <code>--show-version</code> or <code>VKV_EXPORT_SHOW_VERSION=false</code></li>
+<li><code>[key=value]</code> represents the custom metadata that we added to the secret in step 3. (disable by <code>--show-metadata</code> or (<code>VKV_EXPORT_SHOW_METADATA=false</code>)</li>
+</ul>
+<p>This output format is the default format called <code>base</code>. <code>vkv</code> has many other useful output formats.</p>
+<p>You can see them all using this onliner:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#66d9ef>for</span> f in base yaml json markdown policy export; <span style=color:#66d9ef>do</span>
+echo -n <span style=color:#e6db74>&#34;\n===&gt; Output Format: </span>$f<span style=color:#e6db74> &lt;===\n&#34;</span>
+vkv export -p secret --format<span style=color:#f92672>=</span>$f;
+<span style=color:#66d9ef>done</span> 
+
+<span style=color:#f92672>===</span>&gt; Output Format: base &lt;<span style=color:#f92672>===</span>
+secret/
+├── v1: admin <span style=color:#f92672>[</span>key<span style=color:#f92672>=</span>value<span style=color:#f92672>]</span>
+│   ├── password<span style=color:#f92672>=</span>********
+│   └── username<span style=color:#f92672>=</span>****
+└── db/
+    ├── v1: dev
+    │   ├── env<span style=color:#f92672>=</span>***
+    │   ├── password<span style=color:#f92672>=</span>************
+    │   └── username<span style=color:#f92672>=</span>****
+    └── v1: prod
+        ├── env<span style=color:#f92672>=</span>****
+        ├── password<span style=color:#f92672>=</span>************
+        └── username<span style=color:#f92672>=</span>****
+
+<span style=color:#f92672>===</span>&gt; Output Format: yaml &lt;<span style=color:#f92672>===</span>
+secret/:
+  admin:
+    password: <span style=color:#e6db74>&#39;********&#39;</span>
+    username: <span style=color:#e6db74>&#39;****&#39;</span>
+  db/:
+    dev:
+      env: <span style=color:#e6db74>&#39;***&#39;</span>
+      password: <span style=color:#e6db74>&#39;************&#39;</span>
+      username: <span style=color:#e6db74>&#39;****&#39;</span>
+    prod:
+      env: <span style=color:#e6db74>&#39;****&#39;</span>
+      password: <span style=color:#e6db74>&#39;*************&#39;</span>
+      username: <span style=color:#e6db74>&#39;****&#39;</span>
+
+
+<span style=color:#f92672>===</span>&gt; Output Format: json &lt;<span style=color:#f92672>===</span>
+<span style=color:#f92672>{</span>
+  <span style=color:#e6db74>&#34;secret/&#34;</span>: <span style=color:#f92672>{</span>
+    <span style=color:#e6db74>&#34;admin&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;********&#34;</span>,
+      <span style=color:#e6db74>&#34;username&#34;</span>: <span style=color:#e6db74>&#34;****&#34;</span>
+    <span style=color:#f92672>}</span>,
+    <span style=color:#e6db74>&#34;db/&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;dev&#34;</span>: <span style=color:#f92672>{</span>
+        <span style=color:#e6db74>&#34;env&#34;</span>: <span style=color:#e6db74>&#34;***&#34;</span>,
+        <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;************&#34;</span>,
+        <span style=color:#e6db74>&#34;username&#34;</span>: <span style=color:#e6db74>&#34;****&#34;</span>
+      <span style=color:#f92672>}</span>,
+      <span style=color:#e6db74>&#34;prod&#34;</span>: <span style=color:#f92672>{</span>
+        <span style=color:#e6db74>&#34;env&#34;</span>: <span style=color:#e6db74>&#34;****&#34;</span>,
+        <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;*************&#34;</span>,
+        <span style=color:#e6db74>&#34;username&#34;</span>: <span style=color:#e6db74>&#34;****&#34;</span>
+      <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+  <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#f92672>===</span>&gt; Output Format: markdown &lt;<span style=color:#f92672>===</span>
+|      PATH      |   KEY    |    VALUE     | VERSION | METADATA  |
+|----------------|----------|--------------|---------|-----------|
+| secret/admin   | password | ********     |       <span style=color:#ae81ff>1</span> | key<span style=color:#f92672>=</span>value |
+|                | username | ****         |         |           |
+| secret/db/dev  | env      | ***          |       <span style=color:#ae81ff>1</span> |           |
+|                | password | ************ |         |           |
+|                | username | ****         |         |           |
+| secret/db/prod | env      | ****         |       <span style=color:#ae81ff>1</span> |           |
+|                | password | ************ |         |           |
+|                | username | ****         |         |           |
+
+<span style=color:#f92672>===</span>&gt; Output Format: policy &lt;<span style=color:#f92672>===</span>
+PATH            CREATE  READ    UPDATE  DELETE  LIST    ROOT
+secret/admin    ✖       ✖       ✖       ✖       ✖       ✔
+secret/db/dev   ✖       ✖       ✖       ✖       ✖       ✔
+secret/db/prod  ✖       ✖       ✖       ✖       ✖       ✔
+
+<span style=color:#f92672>===</span>&gt; Output Format: export &lt;<span style=color:#f92672>===</span>
+export env<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;prod&#39;</span>
+export password<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;passw0rd-prod&#39;</span>
+export username<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;user&#39;</span>
+</code></pre></div><p>Most of these formats, offer various commandline flags, such as <code>--show-secrets</code>, <code>--only-paths</code>, <code>--only-keys</code>, <code>--max-value-length</code> to modify the output. These flags can also be set through environment variables:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>VKV_EXPORT_FORMAT<span style=color:#f92672>=</span>JSON VKV_EXPORT_SHOW_VALUES<span style=color:#f92672>=</span>true vkv export -p secret
+<span style=color:#f92672>{</span>
+  <span style=color:#e6db74>&#34;secret/&#34;</span>: <span style=color:#f92672>{</span>
+    <span style=color:#e6db74>&#34;admin&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;passw0rd&#34;</span>,
+      <span style=color:#e6db74>&#34;username&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>
+    <span style=color:#f92672>}</span>,
+    <span style=color:#e6db74>&#34;db/&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;dev&#34;</span>: <span style=color:#f92672>{</span>
+        <span style=color:#e6db74>&#34;env&#34;</span>: <span style=color:#e6db74>&#34;dev&#34;</span>,
+        <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;passw0rd-dev&#34;</span>,
+        <span style=color:#e6db74>&#34;username&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>
+      <span style=color:#f92672>}</span>,
+      <span style=color:#e6db74>&#34;prod&#34;</span>: <span style=color:#f92672>{</span>
+        <span style=color:#e6db74>&#34;env&#34;</span>: <span style=color:#e6db74>&#34;prod&#34;</span>,
+        <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;passw0rd-prod&#34;</span>,
+        <span style=color:#e6db74>&#34;username&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>
+      <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+  <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><h3 id=05-import-secrets-using-vkv>05. Import secrets using <code>vkv</code></h3>
+<p>Meanwhile <code>vkv export</code> can be used to store secrets, <code>vkv import</code> is used to import secrets from a <code>vkv export</code> command (either <code>yaml</code> or <code>json</code> format is accepted).</p>
+<p>Knowing this, we can copy a secret engine to another secret engine:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>yaml --show-values | vkv import - -p copy
+reading secrets from STDIN
+parsing secrets from YAML
+writing secret <span style=color:#e6db74>&#34;copy/db/dev&#34;</span> 
+writing secret <span style=color:#e6db74>&#34;copy/db/prod&#34;</span> 
+writing secret <span style=color:#e6db74>&#34;copy/admin&#34;</span> 
+successfully imported all secrets
+
+result:
+
+copy/
+├── v1: admin
+│   ├── password<span style=color:#f92672>=</span>********
+│   └── username<span style=color:#f92672>=</span>****
+└── db/
+    ├── v1: dev
+    │   ├── env<span style=color:#f92672>=</span>***
+    │   ├── password<span style=color:#f92672>=</span>************
+    │   └── username<span style=color:#f92672>=</span>****
+    └── v1: prod
+        ├── env<span style=color:#f92672>=</span>****
+        ├── password<span style=color:#f92672>=</span>************
+        └── username<span style=color:#f92672>=</span>****
+</code></pre></div><p>Or even to another Vault instance:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>yaml --show-values| VAULT_ADDR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;...&#34;</span> VAULT_TOKEN<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;...&#34;</span> vkv import - -p copy
+<span style=color:#f92672>[</span>...<span style=color:#f92672>]</span>
+</code></pre></div><p>Dont forget to set <code>--show-values</code> otherwise <code>vkv</code> will import masked <code>secrets</code>.</p>
+<p>The <code>-</code> tells <code>vkv</code> to read the secrets from STDIN. You cal also specifiy a file using the <code>--file</code> parameter.</p>
+<p><code>vkv</code> will create the <code>KVv2</code> engine if it doesn&rsquo;t exist. If the engine indeed exists, <code>vkv</code> will error unless <code>--force</code> is used.</p>
+<p>You can also copy subpaths to other engines:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret/admin -f<span style=color:#f92672>=</span>yaml --show-values| vkv import - -p admin
+reading secrets from STDIN
+parsing secrets from YAML
+writing secret <span style=color:#e6db74>&#34;admin/admin&#34;</span> 
+successfully imported all secrets
+
+result:
+
+admin/
+└── v1: admin
+    ├── password<span style=color:#f92672>=</span>********
+    └── username<span style=color:#f92672>=</span>****
+</code></pre></div><h3 id=06-create-kvv2-snapshots-using-vkv>06. Create KVv2 Snapshots using <code>vkv</code></h3>
+<p><code>vkv</code> enables you to create and restore snapshots of all KVv2 engines in all namespaces of a Vault instance (requires an appropiate token + policy):</p>
+<p>Consider the following namespaces and KVv2 engines on a Vault Enterprise instance:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># list all namespaces</span>
+vkv list namespaces --all
+sub
+sub/sub2
+test
+test/test2
+test/test2/test3
+
+<span style=color:#75715e># list all engines with their respective namespace as the prefix</span>
+vkv list engines --all --include-ns-prefix
+secret
+secret_2
+sub/sub2/sub_sub2_secret
+sub/sub2/sub_sub2_secret_2
+sub/sub_secret
+sub/sub_secret_2
+test/test2/test3/test_test2_test3_secret
+test/test2/test3/test_test2_test3_secret_2
+</code></pre></div><p>You can create a snapshot of those KVv2 engines by running:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv snapshot save --destionation vkv-export-<span style=color:#66d9ef>$(</span>date <span style=color:#e6db74>&#39;+%Y-%m-%d&#39;</span><span style=color:#66d9ef>)</span>
+created vkv-export-2022-12-29
+created vkv-export-2022-12-29/secret.yaml
+created vkv-export-2022-12-29/secret_2.yaml
+created vkv-export-2022-12-29/sub
+created vkv-export-2022-12-29/sub/sub_secret_2.yaml
+created vkv-export-2022-12-29/sub/sub_secret.yaml
+created vkv-export-2022-12-29/sub/sub2
+created vkv-export-2022-12-29/sub/sub2/sub_sub2_secret.yaml
+created vkv-export-2022-12-29/sub/sub2/sub_sub2_secret_2.yaml
+created vkv-export-2022-12-29/test
+created vkv-export-2022-12-29/test/test2
+created vkv-export-2022-12-29/test/test2/test3
+created vkv-export-2022-12-29/test/test2/test3/test_test2_test3_secret.yaml
+created vkv-export-2022-12-29/test/test2/test3/test_test2_test3_secret_2.yaml
+</code></pre></div><p>As you cann see: <code>vkv</code> exported all engines and wrote them to the specified directory:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv-export-2022-12-29/
+├── secret_2.yaml
+├── secret.yaml
+├── sub
+│   ├── sub2
+│   │   ├── sub_sub2_secret_2.yaml
+│   │   └── sub_sub2_secret.yaml
+│   ├── sub_secret_2.yaml
+│   └── sub_secret.yaml
+└── test
+    └── test2
+        └── test3
+            ├── test_test2_test3_secret_2.yaml
+            └── test_test2_test3_secret.yaml
+
+<span style=color:#ae81ff>5</span> directories, <span style=color:#ae81ff>8</span> files
+</code></pre></div><p>whereas one file is the JSON output of a single KVv2 engine:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cat vkv-export-2022-12-29/secret.yaml  
+<span style=color:#f92672>{</span>
+  <span style=color:#e6db74>&#34;admin&#34;</span>: <span style=color:#f92672>{</span>
+    <span style=color:#e6db74>&#34;sub&#34;</span>: <span style=color:#e6db74>&#34;password&#34;</span>
+  <span style=color:#f92672>}</span>,
+  <span style=color:#e6db74>&#34;demo&#34;</span>: <span style=color:#f92672>{</span>
+    <span style=color:#e6db74>&#34;foo&#34;</span>: <span style=color:#e6db74>&#34;bar&#34;</span>
+  <span style=color:#f92672>}</span>,
+  <span style=color:#e6db74>&#34;sub/&#34;</span>: <span style=color:#f92672>{</span>
+    <span style=color:#e6db74>&#34;demo&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;demo&#34;</span>: <span style=color:#e6db74>&#34;hello world&#34;</span>,
+      <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;s3cre5&#34;</span>,
+      <span style=color:#e6db74>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;admin&#34;</span>
+    <span style=color:#f92672>}</span>,
+    <span style=color:#e6db74>&#34;sub2/&#34;</span>: <span style=color:#f92672>{</span>
+      <span style=color:#e6db74>&#34;demo&#34;</span>: <span style=color:#f92672>{</span>
+        <span style=color:#e6db74>&#34;admin&#34;</span>: <span style=color:#e6db74>&#34;key&#34;</span>,
+        <span style=color:#e6db74>&#34;foo&#34;</span>: <span style=color:#e6db74>&#34;bar&#34;</span>,
+        <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;password&#34;</span>,
+        <span style=color:#e6db74>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>
+      <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+  <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>You could <code>.tar.gz</code> those directories and save those encrypted files in a secure fashion.</p>
+<h3 id=07-restore-vkv-snapshots>07. Restore vkv snapshots</h3>
+<p>In order to restore a <code>vkv</code> snapshot the <code>snapshot restore</code> command is invoked:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># no KVv2 engines configured</span>
+vkv list engines --all --include-ns-prefix                      
+<span style=color:#f92672>[</span>ERROR<span style=color:#f92672>]</span> no engines found.
+
+<span style=color:#75715e># restore a snapshot</span>
+vkv snapshot restore --source vkv-export-2022-12-29
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> restore engine: secret
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;secret/admin&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;secret/demo&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;secret/sub/demo&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;secret/sub/sub2/demo&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> restore engine: secret_2
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;secret_2/admin&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;secret_2/demo&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;secret_2/sub/demo&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;secret_2/sub/sub2/demo&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> restore namespace: <span style=color:#e6db74>&#34;sub&#34;</span>
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> restore namespace: <span style=color:#e6db74>&#34;sub2&#34;</span>
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> restore engine: sub_sub2_secret
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_sub2_secret/admin&#34;</span> 
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_sub2_secret/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_sub2_secret/sub/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_sub2_secret/sub/sub2/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> restore engine: sub_sub2_secret_2
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_sub2_secret_2/admin&#34;</span> 
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_sub2_secret_2/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_sub2_secret_2/sub/sub2/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub/sub2<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_sub2_secret_2/sub/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> restore engine: sub_secret
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_secret/admin&#34;</span> 
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_secret/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_secret/sub/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_secret/sub/sub2/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> restore engine: sub_secret_2
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_secret_2/sub/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_secret_2/sub/sub2/demo&#34;</span> 
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_secret_2/admin&#34;</span> 
+<span style=color:#f92672>[</span>sub<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;sub_secret_2/demo&#34;</span> 
+<span style=color:#f92672>[</span>root<span style=color:#f92672>]</span> restore namespace: <span style=color:#e6db74>&#34;test&#34;</span>
+<span style=color:#f92672>[</span>test<span style=color:#f92672>]</span> restore namespace: <span style=color:#e6db74>&#34;test2&#34;</span>
+<span style=color:#f92672>[</span>test/test2<span style=color:#f92672>]</span> restore namespace: <span style=color:#e6db74>&#34;test3&#34;</span>
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> restore engine: test_test2_test3_secret
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;test_test2_test3_secret/sub/sub2/demo&#34;</span> 
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;test_test2_test3_secret/admin&#34;</span> 
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;test_test2_test3_secret/demo&#34;</span> 
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;test_test2_test3_secret/sub/demo&#34;</span> 
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> restore engine: test_test2_test3_secret_2
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;test_test2_test3_secret_2/admin&#34;</span> 
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;test_test2_test3_secret_2/demo&#34;</span> 
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;test_test2_test3_secret_2/sub/demo&#34;</span> 
+<span style=color:#f92672>[</span>test/test2/test3<span style=color:#f92672>]</span> writing secret <span style=color:#e6db74>&#34;test_test2_test3_secret_2/sub/sub2/demo&#34;</span> 
+
+<span style=color:#75715e># verify engines have been created</span>
+vkv list engines --all --include-ns-prefix
+secret
+secret_2
+sub/sub2/sub_sub2_secret
+sub/sub2/sub_sub2_secret_2
+sub/sub_secret
+sub/sub_secret_2
+test/test2/test3/test_test2_test3_secret
+test/test2/test3/test_test2_test3_secret_2
+</code></pre></div><p><strong>Please note, that <code>vkv snapshot restore</code> is an experimental feature, you should always double check <code>vkv</code>s beahviour on a development Vault before running it against a production Vault</strong></p>
+<div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/01_quickstart/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/ title="vkv documentation"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - vkv documentation</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/02_installation/ title=Installation>Next - Installation <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+</nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
+</footer>
+</main>
+<div class=sidebar>
+<nav class=slide-menu>
+<ul>
+<li><a href=https://falcosuessgott.github.io/vkv/>Home</a></li>
+<li class="parent active"><a href=https://falcosuessgott.github.io/vkv/01_quickstart/>Quickstart</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/02_installation/>Installation</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/03_authentication/>Authentication</a>
+</li>
+<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/04_export/>vkv export<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/04_export/formats/>output formats</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/05_import/>vkv import </a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/06_02_snapshot_restore/>vkv snapshot restore</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/06_01_snapshot_save/>vkv snapshot save</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/07_02_list_engines/>vkv list engines</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/07_01_list_namespaces/>vkv list namespaces</a>
+</li>
+<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/>Advanced Examples<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/diff/>compare KVv2 engines</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/fzf/>browse all KVv2 engines</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/sops/>encrypt & decrypt using sops</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/09_development/>Development</a>
+</li>
+</ul>
+</nav>
+<div class=sidebar-footer></div>
+</div>
+</div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20>
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>

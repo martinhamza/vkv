@@ -1,0 +1,99 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Authentication - vkv</title>
+<meta name=description content="the swiss army knife when working with Vault KVv2 engines">
+<meta name=generator content="Hugo 0.92.2">
+<link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/03_authentication/>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
+<script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
+<script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
+<meta property="og:title" content="Authentication">
+<meta property="og:description" content="the swiss army knife when working with Vault KVv2 engines">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/03_authentication/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta name=twitter:title content="Authentication">
+<meta name=twitter:description content="the swiss army knife when working with Vault KVv2 engines">
+<meta itemprop=name content="Authentication">
+<meta itemprop=description content="the swiss army knife when working with Vault KVv2 engines"></head>
+<body><div class=container><header>
+<h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
+<p class=description>the swiss army knife when working with Vault KVv2 engines</p>
+</header>
+<div class=global-menu>
+<nav>
+<ul>
+<li id=home><a href=/vkv/></a></li></ul>
+</nav>
+</div>
+<div class=content-container>
+<main><h1>Authentication</h1><p><code>vkv</code> supports all of Vaults <a href=https://www.vaultproject.io/docs/commands#environment-variables>environment variables</a>. In order to authenticate you will have to set at least <code>VAULT_ADDR</code> and <code>VAULT_TOKEN</code>.</p>
+<h3 id=macoslinux>MacOS/Linux</h3>
+<pre tabindex=0><code>export VAULT_ADDR=&quot;http://127.0.0.1:8200&quot;
+export VAULT_TOKEN=&quot;hvs.XXX&quot; 
+vkv export --path &lt;KVv2-path&gt;
+</code></pre><h3 id=windows>Windows</h3>
+<pre tabindex=0><code>SET VAULT_ADDR=http://127.0.0.1:8200
+SET VAULT_TOKEN=s.XXX
+vkv.exe export --path &lt;KVv2-path&gt;
+</code></pre><p>⚠️ <strong>Your token policy requires <code>read</code> and <code>list</code> capabilities on every path of the specified secret engine, otherwise <code>vkv</code> errors with <code>403</code>. This behaviour is likely to change in future releases.</strong></p>
+<div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/03_authentication/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/02_installation/ title=Installation><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Installation</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/04_export/ title="vkv export">Next - vkv export <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+</nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
+</footer>
+</main>
+<div class=sidebar>
+<nav class=slide-menu>
+<ul>
+<li><a href=https://falcosuessgott.github.io/vkv/>Home</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/01_quickstart/>Quickstart</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/02_installation/>Installation</a>
+</li>
+<li class="parent active"><a href=https://falcosuessgott.github.io/vkv/03_authentication/>Authentication</a>
+</li>
+<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/04_export/>vkv export<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/04_export/formats/>output formats</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/05_import/>vkv import </a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/06_02_snapshot_restore/>vkv snapshot restore</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/06_01_snapshot_save/>vkv snapshot save</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/07_02_list_engines/>vkv list engines</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/07_01_list_namespaces/>vkv list namespaces</a>
+</li>
+<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/>Advanced Examples<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/diff/>compare KVv2 engines</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/fzf/>browse all KVv2 engines</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/sops/>encrypt & decrypt using sops</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/09_development/>Development</a>
+</li>
+</ul>
+</nav>
+<div class=sidebar-footer></div>
+</div>
+</div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20>
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>
