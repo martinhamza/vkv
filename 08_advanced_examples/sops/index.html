@@ -16,7 +16,7 @@
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
 <meta property="og:title" content="encrypt & decrypt using sops">
 <meta property="og:description" content="In order to store the secret export created by vkv sops can be used. This example shows how to encrypt & decrypt vkv exported secrets using sops and Vaults transit engine:
-Prerequisites  Install sops  Demo export VAULT_ADDR=&#34;https://vault.server&#34; export VAULT_TOKEN=&#34;hvs.XXXX&#34; # enable engine and create encryption key vault secrets enable -path=sops transit vault write sops/keys/vkv type=rsa-4096 # export secrets as yaml and write to file vkv -p secret --show-values -f=yaml > export.">
+Prerequisites  Install sops  Demo export VAULT_ADDR=&#34;https://vault.server&#34; export VAULT_TOKEN=&#34;hvs.XXXX&#34; # enable engine and create encryption key vault secrets enable -path=sops transit vault write sops/keys/vkv type=rsa-4096 # export secrets as yaml and write to file vkv export -p secret --show-values -f=yaml > export.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/08_advanced_examples/sops/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="08_advanced_examples">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
@@ -24,11 +24,11 @@ Prerequisites  Install sops  Demo export VAULT_ADDR=&#34;https://vault.server&#3
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta name=twitter:title content="encrypt & decrypt using sops">
 <meta name=twitter:description content="In order to store the secret export created by vkv sops can be used. This example shows how to encrypt & decrypt vkv exported secrets using sops and Vaults transit engine:
-Prerequisites  Install sops  Demo export VAULT_ADDR=&#34;https://vault.server&#34; export VAULT_TOKEN=&#34;hvs.XXXX&#34; # enable engine and create encryption key vault secrets enable -path=sops transit vault write sops/keys/vkv type=rsa-4096 # export secrets as yaml and write to file vkv -p secret --show-values -f=yaml > export.">
+Prerequisites  Install sops  Demo export VAULT_ADDR=&#34;https://vault.server&#34; export VAULT_TOKEN=&#34;hvs.XXXX&#34; # enable engine and create encryption key vault secrets enable -path=sops transit vault write sops/keys/vkv type=rsa-4096 # export secrets as yaml and write to file vkv export -p secret --show-values -f=yaml > export.">
 <meta itemprop=name content="encrypt & decrypt using sops">
 <meta itemprop=description content="In order to store the secret export created by vkv sops can be used. This example shows how to encrypt & decrypt vkv exported secrets using sops and Vaults transit engine:
-Prerequisites  Install sops  Demo export VAULT_ADDR=&#34;https://vault.server&#34; export VAULT_TOKEN=&#34;hvs.XXXX&#34; # enable engine and create encryption key vault secrets enable -path=sops transit vault write sops/keys/vkv type=rsa-4096 # export secrets as yaml and write to file vkv -p secret --show-values -f=yaml > export.">
-<meta itemprop=wordCount content="160"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+Prerequisites  Install sops  Demo export VAULT_ADDR=&#34;https://vault.server&#34; export VAULT_TOKEN=&#34;hvs.XXXX&#34; # enable engine and create encryption key vault secrets enable -path=sops transit vault write sops/keys/vkv type=rsa-4096 # export secrets as yaml and write to file vkv export -p secret --show-values -f=yaml > export.">
+<meta itemprop=wordCount content="161"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -57,7 +57,7 @@ vault secrets enable -path<span style=color:#f92672>=</span>sops transit
 vault write sops/keys/vkv type<span style=color:#f92672>=</span>rsa-4096
 
 <span style=color:#75715e># export secrets as yaml and write to file</span>
-vkv -p secret --show-values -f<span style=color:#f92672>=</span>yaml &gt; export.yaml
+vkv export -p secret --show-values -f<span style=color:#f92672>=</span>yaml &gt; export.yaml
 
 <span style=color:#75715e># configure sops</span>
 cat <span style=color:#e6db74>&lt;&lt;EOF &gt; .sops.yaml
@@ -134,7 +134,7 @@ sops -d encrypted_export.yaml
 </li>
 <li><a href=https://falcosuessgott.github.io/vkv/07_01_list_namespaces/>vkv list namespaces</a>
 </li>
-<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/>Advanced Examples<span class="mark opened">-</span></a>
+<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/>advanced examples<span class="mark opened">-</span></a>
 <ul class=sub-menu>
 <li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/diff/>compare KVv2 engines</a></li>
 <li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/fzf/>browse all KVv2 engines</a></li>

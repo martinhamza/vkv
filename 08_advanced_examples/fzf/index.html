@@ -17,7 +17,7 @@
 <meta property="og:title" content="browse all KVv2 engines">
 <meta property="og:description" content="using vault secrets list and a little bit of jq-logic, we can get a list of all KV-engines visible for the token.
 If we pipe this into fzf we can get a handy little preview-app:
-vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#34;kv&#34;)) | from_entries | keys[]' | fzf --preview 'vkv -p ${}' Demo ">
+vkv list engines --all --include-ns-prefix | fzf --preview 'vkv export -e ${}' Demo ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://falcosuessgott.github.io/vkv/08_advanced_examples/fzf/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="08_advanced_examples">
 <meta property="og:site_name" content="Hugo Techdoc Theme">
@@ -26,12 +26,12 @@ vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#
 <meta name=twitter:title content="browse all KVv2 engines">
 <meta name=twitter:description content="using vault secrets list and a little bit of jq-logic, we can get a list of all KV-engines visible for the token.
 If we pipe this into fzf we can get a handy little preview-app:
-vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#34;kv&#34;)) | from_entries | keys[]' | fzf --preview 'vkv -p ${}' Demo ">
+vkv list engines --all --include-ns-prefix | fzf --preview 'vkv export -e ${}' Demo ">
 <meta itemprop=name content="browse all KVv2 engines">
 <meta itemprop=description content="using vault secrets list and a little bit of jq-logic, we can get a list of all KV-engines visible for the token.
 If we pipe this into fzf we can get a handy little preview-app:
-vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#34;kv&#34;)) | from_entries | keys[]' | fzf --preview 'vkv -p ${}' Demo ">
-<meta itemprop=wordCount content="56"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+vkv list engines --all --include-ns-prefix | fzf --preview 'vkv export -e ${}' Demo ">
+<meta itemprop=wordCount content="48"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
 <meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -47,7 +47,7 @@ vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#
 <main><h1>browse all KVv2 engines</h1>
 <p>using <code>vault secrets list</code> and a little bit of <code>jq</code>-logic, we can get a list of all KV-engines visible for the token.</p>
 <p>If we pipe this into <code>fzf</code> we can get a handy little preview-app:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vault secrets list -format<span style=color:#f92672>=</span>json | jq -r <span style=color:#e6db74>&#39;to_entries | map(select(.value.type==&#34;kv&#34;)) | from_entries | keys[]&#39;</span> | fzf --preview <span style=color:#e6db74>&#39;vkv -p ${}&#39;</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv list engines --all --include-ns-prefix | fzf --preview <span style=color:#e6db74>&#39;vkv export -e ${}&#39;</span>
 </code></pre></div><h3 id=demo>Demo</h3>
 <div align=center>
 <br>
@@ -83,7 +83,7 @@ vault secrets list -format=json | jq -r 'to_entries | map(select(.value.type==&#
 </li>
 <li><a href=https://falcosuessgott.github.io/vkv/07_01_list_namespaces/>vkv list namespaces</a>
 </li>
-<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/>Advanced Examples<span class="mark opened">-</span></a>
+<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/>advanced examples<span class="mark opened">-</span></a>
 <ul class=sub-menu>
 <li><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/diff/>compare KVv2 engines</a></li>
 <li class=active><a href=https://falcosuessgott.github.io/vkv/08_advanced_examples/fzf/>browse all KVv2 engines</a></li>
