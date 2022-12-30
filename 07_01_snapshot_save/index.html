@@ -2,11 +2,11 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Categories - vkv</title>
+<title>vkv snapshot save - vkv</title>
 <meta name=description content="the swiss army knife when working with Vault KVv2 engines">
 <meta name=generator content="Hugo 0.92.2">
 <link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
-<link rel=canonical href=https://falcosuessgott.github.io/vkv/categories/>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/07_01_snapshot_save/>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
 <script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
@@ -14,15 +14,15 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
-<meta property="og:title" content="Categories">
+<meta property="og:title" content="vkv snapshot save">
 <meta property="og:description" content="the swiss army knife when working with Vault KVv2 engines">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://falcosuessgott.github.io/vkv/categories/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/07_01_snapshot_save/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
-<meta name=twitter:title content="Categories">
+<meta name=twitter:title content="vkv snapshot save">
 <meta name=twitter:description content="the swiss army knife when working with Vault KVv2 engines">
-<meta itemprop=name content="Categories">
+<meta itemprop=name content="vkv snapshot save">
 <meta itemprop=description content="the swiss army knife when working with Vault KVv2 engines"></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -35,8 +35,15 @@
 </nav>
 </div>
 <div class=content-container>
-<main><h1>Categories</h1><div class=edit-meta>
-<br></div><nav class=pagination><a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/01_quickstart/ title=Quickstart>Next - Quickstart <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<main><h1>vkv snapshot save</h1><p>create a snapshot of all visible KV engines recursively for all namespaces</p>
+<pre tabindex=0><code>vkv snapshot save [flags]
+</code></pre><h3 id=options>Options</h3>
+<pre tabindex=0><code>  -d, --destination string   vkv snapshot destination path (env: VKV_SNAPSHOT_SAVE_DESTINATION) (default &quot;./vkv-snapshot-export&quot;)
+  -h, --help                 help for save
+  -n, --namespace string     namespaces from which to save recursively all visible KV engines (env: VKV_SNAPSHOT_SAVE_NS
+</code></pre><div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/07_01_snapshot_save/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/06_import/ title="vkv import "><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - vkv import </a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/07_02_snapshot_restore/ title="vkv snapshot restore">Next - vkv snapshot restore <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -59,7 +66,7 @@
 </li>
 <li><a href=https://falcosuessgott.github.io/vkv/06_import/>vkv import </a>
 </li>
-<li><a href=https://falcosuessgott.github.io/vkv/07_01_snapshot_save/>vkv snapshot save</a>
+<li class="parent active"><a href=https://falcosuessgott.github.io/vkv/07_01_snapshot_save/>vkv snapshot save</a>
 </li>
 <li><a href=https://falcosuessgott.github.io/vkv/07_02_snapshot_restore/>vkv snapshot restore</a>
 </li>

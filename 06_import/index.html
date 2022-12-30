@@ -2,11 +2,11 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Categories - vkv</title>
+<title>vkv import - vkv</title>
 <meta name=description content="the swiss army knife when working with Vault KVv2 engines">
 <meta name=generator content="Hugo 0.92.2">
 <link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
-<link rel=canonical href=https://falcosuessgott.github.io/vkv/categories/>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/06_import/>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
 <script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
@@ -14,15 +14,15 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
-<meta property="og:title" content="Categories">
+<meta property="og:title" content="vkv import ">
 <meta property="og:description" content="the swiss army knife when working with Vault KVv2 engines">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://falcosuessgott.github.io/vkv/categories/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/06_import/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
-<meta name=twitter:title content="Categories">
+<meta name=twitter:title content="vkv import ">
 <meta name=twitter:description content="the swiss army knife when working with Vault KVv2 engines">
-<meta itemprop=name content="Categories">
+<meta itemprop=name content="vkv import ">
 <meta itemprop=description content="the swiss army knife when working with Vault KVv2 engines"></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -35,8 +35,31 @@
 </nav>
 </div>
 <div class=content-container>
-<main><h1>Categories</h1><div class=edit-meta>
-<br></div><nav class=pagination><a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/01_quickstart/ title=Quickstart>Next - Quickstart <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<main><h1>vkv import </h1><p>import secrets from vkv&rsquo;s json or yaml output</p>
+<pre tabindex=0><code>vkv import [flags]
+</code></pre><h3 id=options>Options</h3>
+<pre tabindex=0><code>  -d, --dry-run                print resulting KV engine (env: VKV_IMPORT_DRY_RUN)
+  -f, --file string            path to a file containing vkv yaml or json output (env: VKV_IMPORT_FILE)
+      --force                  overwrite existing kv entries (env: VKV_IMPORT_FORCE)
+  -h, --help                   help for import
+      --max-value-length int   maximum char length of values. Set to &quot;-1&quot; for disabling (env: VKV_IMPORT_MAX_VALUE_LENGTH) (default 12)
+  -p, --path string            KVv2 Engine path (env: VKV_IMPORT_PATH)
+      --show-values            don't mask values (env: VKV_IMPORT_SHOW_VALUES)
+  -s, --silent                 do not output secrets (env: VKV_IMPORT_SILENT)
+</code></pre><h1 id=read-secrets-from-stdin>read secrets from STDIN</h1>
+<p>The <code>-</code> in <code>vkv import -</code>, tells <code>vkv</code> do read data via STDIN. The idea of <code>vkv import -</code> is, in order to copy/mirror KV-v2 secrets or complete engines across diferrent Vault Servers or Namespaces, you can simply pipe
+<code>vkv</code>s output into the <code>vkv import</code> command:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># dont forget to use --show-values, otherwise the secrets will be uploaded masked.</span>
+vkv -p &lt;source&gt; --show-values -f<span style=color:#f92672>=</span>yaml | vkv import - -p &lt;destination&gt;
+</code></pre></div><h3 id=a-few-notes>A few notes:</h3>
+<ul>
+<li><code>&lt;source></code> and <code>&lt;destination></code> dont have to be the root path of a secret engine, you also specify subpaths and copy them another secret engine.</li>
+<li><code>vkv</code> will error if the enabled secret engine already exist, you can use <code>--force</code> to overwrite the destination engine, if the destination path contains a subpath (<code>root/sub</code>), <code>vkv</code> will then insert the secrets to that specific directory</li>
+</ul>
+<p><strong>⚠️ <code>vkv import</code> can overwrite important secrets, always double check the commmand by using the dry-run mode (<code>--dry-run</code>) first</strong></p>
+<div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/06_import/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/05_export/formats/ title="output formats"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - output formats</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/07_01_snapshot_save/ title="vkv snapshot save">Next - vkv snapshot save <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -57,7 +80,7 @@
 <li><a href=https://falcosuessgott.github.io/vkv/05_export/formats/>output formats</a></li>
 </ul>
 </li>
-<li><a href=https://falcosuessgott.github.io/vkv/06_import/>vkv import </a>
+<li class="parent active"><a href=https://falcosuessgott.github.io/vkv/06_import/>vkv import </a>
 </li>
 <li><a href=https://falcosuessgott.github.io/vkv/07_01_snapshot_save/>vkv snapshot save</a>
 </li>

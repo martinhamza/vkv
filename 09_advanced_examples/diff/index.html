@@ -2,11 +2,11 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Categories - vkv</title>
+<title>compare KVv2 engines - vkv</title>
 <meta name=description content="the swiss army knife when working with Vault KVv2 engines">
 <meta name=generator content="Hugo 0.92.2">
 <link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
-<link rel=canonical href=https://falcosuessgott.github.io/vkv/categories/>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/09_advanced_examples/diff/>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
 <script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
@@ -14,16 +14,25 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
-<meta property="og:title" content="Categories">
-<meta property="og:description" content="the swiss army knife when working with Vault KVv2 engines">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://falcosuessgott.github.io/vkv/categories/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta property="og:title" content="compare KVv2 engines">
+<meta property="og:description" content="vkv can be used to compare secrets across Vault servers or KV engines.
+&#34;diff -ty <(vkv export --p=secret --show-values) <(vkv export -p=secret_2 --show-values)&#34; Here is an example using diff, the | indicates the changed entry per line:
+Demo  ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/09_advanced_examples/diff/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="09_advanced_examples">
+<meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
-<meta name=twitter:title content="Categories">
-<meta name=twitter:description content="the swiss army knife when working with Vault KVv2 engines">
-<meta itemprop=name content="Categories">
-<meta itemprop=description content="the swiss army knife when working with Vault KVv2 engines"></head>
+<meta name=twitter:title content="compare KVv2 engines">
+<meta name=twitter:description content="vkv can be used to compare secrets across Vault servers or KV engines.
+&#34;diff -ty <(vkv export --p=secret --show-values) <(vkv export -p=secret_2 --show-values)&#34; Here is an example using diff, the | indicates the changed entry per line:
+Demo  ">
+<meta itemprop=name content="compare KVv2 engines">
+<meta itemprop=description content="vkv can be used to compare secrets across Vault servers or KV engines.
+&#34;diff -ty <(vkv export --p=secret --show-values) <(vkv export -p=secret_2 --show-values)&#34; Here is an example using diff, the | indicates the changed entry per line:
+Demo  ">
+<meta itemprop=wordCount content="38"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=keywords content></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
 <p class=description>the swiss army knife when working with Vault KVv2 engines</p>
@@ -35,8 +44,18 @@
 </nav>
 </div>
 <div class=content-container>
-<main><h1>Categories</h1><div class=edit-meta>
-<br></div><nav class=pagination><a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/01_quickstart/ title=Quickstart>Next - Quickstart <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<main><h1>compare KVv2 engines</h1>
+<p><code>vkv</code> can be used to compare secrets across Vault servers or KV engines.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#e6db74>&#34;diff -ty &lt;(vkv export --p=secret --show-values) &lt;(vkv export -p=secret_2 --show-values)&#34;</span>
+</code></pre></div><p>Here is an example using <code>diff</code>, the <code>|</code> indicates the changed entry per line:</p>
+<h3 id=demo>Demo</h3>
+<div align=center>
+<br>
+<img src=https://media.githubusercontent.com/media/FalcoSuessgott/vkv/master/www/static/images/diff.gif alt=drawing width=1000>
+</div>
+<div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/09_advanced_examples/diff.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/09_advanced_examples/ title="Advanced examples"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Advanced examples</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/09_advanced_examples/fzf/ title="browse all KVv2 engines">Next - browse all KVv2 engines <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -67,9 +86,9 @@
 </li>
 <li><a href=https://falcosuessgott.github.io/vkv/08_02_list_engines/>vkv list engines</a>
 </li>
-<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/>Advanced examples<span class="mark closed">+</span></a>
+<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/>Advanced examples<span class="mark opened">-</span></a>
 <ul class=sub-menu>
-<li><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/diff/>compare KVv2 engines</a></li>
+<li class=active><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/diff/>compare KVv2 engines</a></li>
 <li><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/fzf/>browse all KVv2 engines</a></li>
 <li><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/sops/>encrypt & decrypt using sops</a></li>
 </ul>

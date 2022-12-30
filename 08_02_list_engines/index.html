@@ -2,11 +2,11 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Categories - vkv</title>
+<title>vkv list engines - vkv</title>
 <meta name=description content="the swiss army knife when working with Vault KVv2 engines">
 <meta name=generator content="Hugo 0.92.2">
 <link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
-<link rel=canonical href=https://falcosuessgott.github.io/vkv/categories/>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/08_02_list_engines/>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
 <script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
@@ -14,15 +14,15 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
-<meta property="og:title" content="Categories">
+<meta property="og:title" content="vkv list engines">
 <meta property="og:description" content="the swiss army knife when working with Vault KVv2 engines">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://falcosuessgott.github.io/vkv/categories/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/08_02_list_engines/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
-<meta name=twitter:title content="Categories">
+<meta name=twitter:title content="vkv list engines">
 <meta name=twitter:description content="the swiss army knife when working with Vault KVv2 engines">
-<meta itemprop=name content="Categories">
+<meta itemprop=name content="vkv list engines">
 <meta itemprop=description content="the swiss army knife when working with Vault KVv2 engines"></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -35,8 +35,18 @@
 </nav>
 </div>
 <div class=content-container>
-<main><h1>Categories</h1><div class=edit-meta>
-<br></div><nav class=pagination><a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/01_quickstart/ title=Quickstart>Next - Quickstart <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<main><h1>vkv list engines</h1><p>list all KVv2 engines</p>
+<pre tabindex=0><code>vkv list engines [flags]
+</code></pre><h3 id=options>Options</h3>
+<pre tabindex=0><code>  -n, --namespace string    specify the namespace (env: VKV_LIST_ENGINES_NS)
+  -p, --include-ns-prefix   prepend the namespaces (env: VKV_LIST_ENGINES_NS_PREFIX)
+  -r, --regex string        filter engines by the specified regex pattern (env: VKV_LIST_ENGINES_REGEX
+  -a, --all                 list all KV engines recursively from the specified namespaces (env: VKV_LIST_ENGINES_ALL)
+  -f, --format string       available output formats: &quot;base&quot;, &quot;json&quot;, &quot;yaml&quot; (env: VKV_LIST_ENGINES_FORMAT) (default &quot;base&quot;)
+  -h, --help                help for engines
+</code></pre><div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/08_02_list_engines/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/08_01_list_namespaces/ title="vkv list namespaces"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - vkv list namespaces</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/09_advanced_examples/ title="Advanced examples">Next - Advanced examples <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -65,7 +75,7 @@
 </li>
 <li><a href=https://falcosuessgott.github.io/vkv/08_01_list_namespaces/>vkv list namespaces</a>
 </li>
-<li><a href=https://falcosuessgott.github.io/vkv/08_02_list_engines/>vkv list engines</a>
+<li class="parent active"><a href=https://falcosuessgott.github.io/vkv/08_02_list_engines/>vkv list engines</a>
 </li>
 <li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/>Advanced examples<span class="mark closed">+</span></a>
 <ul class=sub-menu>

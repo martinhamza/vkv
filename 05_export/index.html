@@ -2,11 +2,11 @@
 <head><meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Categories - vkv</title>
+<title>vkv export - vkv</title>
 <meta name=description content="the swiss army knife when working with Vault KVv2 engines">
 <meta name=generator content="Hugo 0.92.2">
 <link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
-<link rel=canonical href=https://falcosuessgott.github.io/vkv/categories/>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/05_export/>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
 <link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
 <script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
@@ -14,15 +14,15 @@
 <script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
 <script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
-<meta property="og:title" content="Categories">
+<meta property="og:title" content="vkv export">
 <meta property="og:description" content="the swiss army knife when working with Vault KVv2 engines">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://falcosuessgott.github.io/vkv/categories/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/05_export/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="og:site_name" content="Hugo Techdoc Theme">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
-<meta name=twitter:title content="Categories">
+<meta name=twitter:title content="vkv export">
 <meta name=twitter:description content="the swiss army knife when working with Vault KVv2 engines">
-<meta itemprop=name content="Categories">
+<meta itemprop=name content="vkv export">
 <meta itemprop=description content="the swiss army knife when working with Vault KVv2 engines"></head>
 <body><div class=container><header>
 <h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
@@ -35,8 +35,25 @@
 </nav>
 </div>
 <div class=content-container>
-<main><h1>Categories</h1><div class=edit-meta>
-<br></div><nav class=pagination><a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/01_quickstart/ title=Quickstart>Next - Quickstart <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+<main><h1>vkv export</h1><p>recursively list secrets from Vaults KV2 engine in various formats</p>
+<pre tabindex=0><code>vkv export [flags]
+</code></pre><h3 id=options>Options</h3>
+<pre tabindex=0><code>  -p, --path string              KVv2 Engine path (env: VKV_EXPORT_PATH)
+  -e, --engine-path string       Specify the engine path using this flag in case your kv-engine contains special characters such as &quot;/&quot;.
+                                 vkv will then append the values of the path-flag to the engine path, if specified (&lt;engine-path&gt;/&lt;path&gt;)(env: VKV_EXPORT_ENGINE_PATH)
+      --only-keys                show only keys (env: VKV_EXPORT_ONLY_KEYS)
+      --only-paths               show only paths (env: VKV_EXPORT_ONLY_PATHS)
+      --show-version             show the secret version (env: VKV_EXPORT_VERSION) (default true)
+      --show-metadata            show the secrets metadata (env: VKV_EXPORT_METADATA) (default true)
+      --show-values              don't mask values (env: VKV_EXPORT_SHOW_VALUES)
+      --max-value-length int     maximum char length of values. Set to &quot;-1&quot; for disabling (env: VKV_EXPORT_MAX_VALUE_LENGTH) (default 12)
+      --template-file string     path to a file containing Go-template syntax to render the KV entries (env: VKV_EXPORT_TEMPLATE_FILE)
+      --template-string string   template string containing Go-template syntax to render KV entries (env: VKV_EXPORT_TEMPLATE_STRING)
+  -f, --format string            available output formats: &quot;base&quot;, &quot;json&quot;, &quot;yaml&quot;, &quot;export&quot;, &quot;policy&quot;, &quot;markdown&quot;, &quot;template&quot; (env: VKV_EXPORT_FORMAT) (default &quot;base&quot;)
+  -h, --help                     help for export
+</code></pre><div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/05_export/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/04_configuration/ title=Configuration><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Configuration</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/05_export/formats/ title="output formats">Next - output formats <i class="fas fa-arrow-right" aria-hidden=true></i></a>
 </nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
 </footer>
 </main>
@@ -52,7 +69,7 @@
 </li>
 <li><a href=https://falcosuessgott.github.io/vkv/04_configuration/>Configuration</a>
 </li>
-<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/05_export/>vkv export<span class="mark closed">+</span></a>
+<li class="parent active has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/05_export/>vkv export<span class="mark opened">-</span></a>
 <ul class=sub-menu>
 <li><a href=https://falcosuessgott.github.io/vkv/05_export/formats/>output formats</a></li>
 </ul>
