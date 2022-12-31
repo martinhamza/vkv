@@ -25,7 +25,7 @@
 <meta itemprop=name content="Installation">
 <meta itemprop=description content="the swiss army knife when working with Vault KVv2 engines"></head>
 <body><div class=container><header>
-<h1>vkv</h1><span class=version>Version v0.2.0</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
+<h1>vkv</h1><span class=version>Version v0.2.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
 <p class=description>the swiss army knife when working with Vault KVv2 engines</p>
 </header>
 <div class=global-menu>
@@ -36,10 +36,11 @@
 </div>
 <div class=content-container>
 <main><h1>Installation</h1><h3 id=curl>cURL</h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -OL https://github.com/FalcoSuessgott/vkv/releases/latest/download/vkv_0.2.0_<span style=color:#66d9ef>$(</span>uname<span style=color:#66d9ef>)</span>_<span style=color:#66d9ef>$(</span>uname -m<span style=color:#66d9ef>)</span>.tar.gz
-tar xzf vkv_0.2.0_Linux_x86_64.tar.gz
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl -OL https://github.com/FalcoSuessgott/vkv/releases/latest/download/vkv_0.2.1_<span style=color:#66d9ef>$(</span>uname<span style=color:#66d9ef>)</span>_<span style=color:#66d9ef>$(</span>uname -m<span style=color:#66d9ef>)</span>.tar.gz
+tar xzf vkv_0.2.1_Linux_x86_64.tar.gz
 chmod u+x vkv
 ./vkv version
+vkv 0.2.1
 </code></pre></div><h3 id=packages>Packages</h3>
 <p><code>vkv</code> is releases RPM- & DEB packages and Windows & MacOS Binaries.</p>
 <p>You can find and download all artifacts in the <a href=https://github.com/FalcoSuessgott/vkv/releases>release</a> section.</p>
@@ -63,6 +64,12 @@ vkv
 git clone https://github.com/FalcoSuessgott/vkv
 cd vkv
 go install 
+</code></pre></div><h3 id=docker>Docker</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># ghcr.io</span>
+docker run -e VAULT_ADDR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>VAULT_ADDR<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> -e VAULT_TOKEN<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>VAULT_TOKEN<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> ghcr.io/falcosuessgott/vkv
+
+<span style=color:#75715e># docker.hub</span>
+docker run  -e VAULT_ADDR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>VAULT_ADDR<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> -e VAULT_TOKEN<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>VAULT_TOKEN<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> falcosuessgott/vkv
 </code></pre></div><div class=edit-meta>
 <br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/02_installation/_index.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/01_quickstart/ title=Quickstart><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - Quickstart</a>
 <a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/03_authentication/ title=Authentication>Next - Authentication <i class="fas fa-arrow-right" aria-hidden=true></i></a>
