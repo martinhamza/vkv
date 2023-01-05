@@ -1,0 +1,195 @@
+<!doctype html><html lang=en-us>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>scheduled vkv snapshots using Kubernetes - vkv</title>
+<meta name=description content="the swiss army knife when working with Vault KVv2 engines">
+<meta name=generator content="Hugo 0.92.2">
+<link href=https://falcosuessgott.github.io/vkv//index.xml rel=alternate type=application/rss+xml>
+<link rel=canonical href=https://falcosuessgott.github.io/vkv/09_advanced_examples/kubernetes/>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/theme.min.css>
+<link rel=stylesheet href=https://falcosuessgott.github.io/vkv/css/chroma.min.css>
+<script defer src=https://falcosuessgott.github.io/vkv//js/fontawesome6/all.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/jquery.easing@1.4.1/jquery.easing.min.js integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js integrity="sha256-4XodgW4TwIJuDtf+v6vDJ39FVxI0veC/kSCCmnFp7ck=" crossorigin=anonymous></script>
+<script src=https://falcosuessgott.github.io/vkv/js/bundle.js></script><style>:root{}</style>
+<meta property="og:title" content="scheduled vkv snapshots using Kubernetes">
+<meta property="og:description" content="vkv comes in container images, which enable you to run scheduled snapshots in a kubernetes cluster.
+The idea is to schedule a cronjob which snapshots a vault server and writes the snapshot files to a persistent volume.
+Here is a minimum working k3s using local-storage example:
+create the volume directories # on a k3s node mkdir -p /data/volume/pv1 chmod 777 /data/volume/pv1 # for testing create a pv apiVersion: v1 kind: PersistentVolume metadata: name: local-pv spec: capacity: storage: 5Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain storageClassName: local-storage local: path: /data/volumes/pv1 nodeAffinity: required: nodeSelectorTerms: - matchExpressions: - key: kubernetes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://falcosuessgott.github.io/vkv/09_advanced_examples/kubernetes/"><meta property="og:image" content="https://falcosuessgott.github.io/vkv/images/og-image.png"><meta property="article:section" content="09_advanced_examples">
+<meta property="og:site_name" content="Hugo Techdoc Theme">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta name=twitter:title content="scheduled vkv snapshots using Kubernetes">
+<meta name=twitter:description content="vkv comes in container images, which enable you to run scheduled snapshots in a kubernetes cluster.
+The idea is to schedule a cronjob which snapshots a vault server and writes the snapshot files to a persistent volume.
+Here is a minimum working k3s using local-storage example:
+create the volume directories # on a k3s node mkdir -p /data/volume/pv1 chmod 777 /data/volume/pv1 # for testing create a pv apiVersion: v1 kind: PersistentVolume metadata: name: local-pv spec: capacity: storage: 5Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain storageClassName: local-storage local: path: /data/volumes/pv1 nodeAffinity: required: nodeSelectorTerms: - matchExpressions: - key: kubernetes.">
+<meta itemprop=name content="scheduled vkv snapshots using Kubernetes">
+<meta itemprop=description content="vkv comes in container images, which enable you to run scheduled snapshots in a kubernetes cluster.
+The idea is to schedule a cronjob which snapshots a vault server and writes the snapshot files to a persistent volume.
+Here is a minimum working k3s using local-storage example:
+create the volume directories # on a k3s node mkdir -p /data/volume/pv1 chmod 777 /data/volume/pv1 # for testing create a pv apiVersion: v1 kind: PersistentVolume metadata: name: local-pv spec: capacity: storage: 5Gi accessModes: - ReadWriteOnce persistentVolumeReclaimPolicy: Retain storageClassName: local-storage local: path: /data/volumes/pv1 nodeAffinity: required: nodeSelectorTerms: - matchExpressions: - key: kubernetes.">
+<meta itemprop=wordCount content="314"><meta itemprop=image content="https://falcosuessgott.github.io/vkv/images/og-image.png">
+<meta itemprop=keywords content></head>
+<body><div class=container><header>
+<h1>vkv</h1><span class=version>Version v0.2.1</span><a href=https://github.com/FalcoSuessgott/vkv class=github><i class="fab fa-github"></i></a>
+<p class=description>the swiss army knife when working with Vault KVv2 engines</p>
+</header>
+<div class=global-menu>
+<nav>
+<ul>
+<li id=home><a href=/vkv/></a></li></ul>
+</nav>
+</div>
+<div class=content-container>
+<main><h1>scheduled vkv snapshots using Kubernetes</h1>
+<p><code>vkv</code> comes in container images, which enable you to run scheduled snapshots in a kubernetes cluster.</p>
+<p>The idea is to schedule a cronjob which snapshots a vault server and writes the snapshot files to a persistent volume.</p>
+<p>Here is a minimum working <code>k3s</code> using <code>local-storage</code> example:</p>
+<h3 id=create-the-volume-directories>create the volume directories</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># on a k3s node</span>
+mkdir -p /data/volume/pv1
+chmod <span style=color:#ae81ff>777</span> /data/volume/pv1 <span style=color:#75715e># for testing</span>
+</code></pre></div><h3 id=create-a-pv>create a pv</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>v1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>PersistentVolume</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>local-pv</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>capacity</span>:
+    <span style=color:#f92672>storage</span>: <span style=color:#ae81ff>5Gi</span>
+  <span style=color:#f92672>accessModes</span>:
+  - <span style=color:#ae81ff>ReadWriteOnce</span>
+  <span style=color:#f92672>persistentVolumeReclaimPolicy</span>: <span style=color:#ae81ff>Retain</span>
+  <span style=color:#f92672>storageClassName</span>: <span style=color:#ae81ff>local-storage</span>
+  <span style=color:#f92672>local</span>:
+    <span style=color:#f92672>path</span>: <span style=color:#ae81ff>/data/volumes/pv1</span>
+  <span style=color:#f92672>nodeAffinity</span>:
+    <span style=color:#f92672>required</span>:
+      <span style=color:#f92672>nodeSelectorTerms</span>:
+      - <span style=color:#f92672>matchExpressions</span>:
+        - <span style=color:#f92672>key</span>: <span style=color:#ae81ff>kubernetes.io/hostname</span>
+          <span style=color:#f92672>operator</span>: <span style=color:#ae81ff>In</span>
+          <span style=color:#f92672>values</span>:
+          - <span style=color:#ae81ff>worker-node</span> <span style=color:#75715e># change</span>
+</code></pre></div><h3 id=create-a-pvc>create a pvc</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>kind</span>: <span style=color:#ae81ff>PersistentVolumeClaim</span>
+<span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>v1</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>pvc</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>accessModes</span>:
+  - <span style=color:#ae81ff>ReadWriteOnce</span>
+  <span style=color:#f92672>storageClassName</span>: <span style=color:#ae81ff>local-storage</span>
+  <span style=color:#f92672>resources</span>:
+    <span style=color:#f92672>requests</span>:
+      <span style=color:#f92672>storage</span>: <span style=color:#ae81ff>5Gi</span>
+</code></pre></div><h3 id=create-a-cronjob>create a cronjob</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>batch/v1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>CronJob</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>vkv</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>schedule</span>: <span style=color:#e6db74>&#34;* * * * *&#34;</span> <span style=color:#75715e># runs every minute</span>
+  <span style=color:#f92672>jobTemplate</span>:
+    <span style=color:#f92672>spec</span>:
+      <span style=color:#f92672>template</span>:
+        <span style=color:#f92672>spec</span>:
+          <span style=color:#f92672>containers</span>:
+          - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>vkv</span>
+            <span style=color:#f92672>image</span>: <span style=color:#ae81ff>falcosuessgott/vkv:latest</span> <span style=color:#75715e># stick to a version later</span>
+            <span style=color:#f92672>imagePullPolicy</span>: <span style=color:#ae81ff>IfNotPresent</span>
+            <span style=color:#f92672>command</span>: [<span style=color:#e6db74>&#34;/bin/sh&#34;</span>, <span style=color:#e6db74>&#34;-c&#34;</span>]
+            <span style=color:#f92672>args</span>:
+              - <span style=color:#ae81ff>/vkv snapshot save -d /mnt/vkv-export-$(date &#39;+%Y%m%d%H%M%S&#39;)</span>
+            <span style=color:#f92672>env</span>:
+              - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>VAULT_SKIP_VERIFY</span>
+                <span style=color:#f92672>value</span>: <span style=color:#e6db74>&#34;true&#34;</span>
+              - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>VAULT_ADDR</span>
+                <span style=color:#f92672>value</span>: <span style=color:#ae81ff>https://vault-server:8200</span> <span style=color:#75715e># change to Vault API address</span>
+              - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>VAULT_TOKEN</span>
+                <span style=color:#f92672>value</span>: <span style=color:#ae81ff>hvs.xxxx</span> <span style=color:#75715e># change to your token</span>
+            <span style=color:#f92672>volumeMounts</span>:
+              - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>local-persistent-storage </span>
+                <span style=color:#f92672>mountPath</span>: <span style=color:#ae81ff>/mnt</span>
+          <span style=color:#f92672>restartPolicy</span>: <span style=color:#ae81ff>OnFailure</span>
+          <span style=color:#f92672>volumes</span>:
+            - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>local-persistent-storage</span>
+              <span style=color:#f92672>persistentVolumeClaim</span>:
+                <span style=color:#f92672>claimName</span>: <span style=color:#ae81ff>pvc</span>
+</code></pre></div><h3 id=verify-snapshots>verify snapshots</h3>
+<p>if everything went correct, you should see the following:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>ls -l /data/volumes/pv1/
+total <span style=color:#ae81ff>0</span>
+drwxr-xr-x. <span style=color:#ae81ff>2</span> root root <span style=color:#ae81ff>108</span>  5. Jan 09:50 vkv-export-20230105095000
+drwxr-xr-x. <span style=color:#ae81ff>2</span> root root <span style=color:#ae81ff>108</span>  5. Jan 09:51 vkv-export-20230105095100
+</code></pre></div><h3 id=some-last-thoughts>some last thoughts</h3>
+<p>Obviously this approach is just for development purposes. In order to make it production ready, you should consider changing some things, such as:</p>
+<ul>
+<li>inject the environments from a ConfigMap</li>
+<li>inject the token from a Secret</li>
+<li>Or obtain the token using Vaults kubernetes auth engine and the <a href=https://developer.hashicorp.com/vault/docs/platform/k8s/injector>Vault Agent injector</a></li>
+<li>run the cronjob daily</li>
+<li>update the permission of the volumes</li>
+<li>backup the pv</li>
+</ul>
+<div class=edit-meta>
+<br><a href=https://github.com/FalcoSuessgott/vkv/edit/master/www/content/09_advanced_examples/kubernetes.md class=edit-page><i class="fas fa-pen-square"></i>&nbsp;Edit on GitHub</a></div><nav class=pagination><a class="nav nav-prev" href=https://falcosuessgott.github.io/vkv/09_advanced_examples/diff/ title="compare KVv2 engines"><i class="fas fa-arrow-left" aria-hidden=true></i>&nbsp;Prev - compare KVv2 engines</a>
+<a class="nav nav-next" href=https://falcosuessgott.github.io/vkv/09_advanced_examples/fzf/ title="browse all KVv2 engines">Next - browse all KVv2 engines <i class="fas fa-arrow-right" aria-hidden=true></i></a>
+</nav><footer><p class=powered>Powered by <a href=https://gohugo.io>Hugo</a>. Theme by <a href=https://themes.gohugo.io/hugo-theme-techdoc/>TechDoc</a>. Designed by <a href=https://github.com/thingsym/hugo-theme-techdoc>Thingsym</a>.</p>
+</footer>
+</main>
+<div class=sidebar>
+<nav class=slide-menu>
+<ul>
+<li><a href=https://falcosuessgott.github.io/vkv/>Home</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/01_quickstart/>Quickstart</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/02_installation/>Installation</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/03_authentication/>Authentication</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/04_configuration/>Configuration</a>
+</li>
+<li class=has-sub-menu><a href=https://falcosuessgott.github.io/vkv/05_export/>vkv export<span class="mark closed">+</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/05_export/formats/>output formats</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/06_import/>vkv import </a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/07_01_snapshot_save/>vkv snapshot save</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/07_02_snapshot_restore/>vkv snapshot restore</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/08_01_list_namespaces/>vkv list namespaces</a>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/08_02_list_engines/>vkv list engines</a>
+</li>
+<li class="parent has-sub-menu"><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/>Advanced examples<span class="mark opened">-</span></a>
+<ul class=sub-menu>
+<li><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/diff/>compare KVv2 engines</a></li>
+<li class=active><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/kubernetes/>scheduled vkv snapshots using Kubernetes</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/fzf/>browse all KVv2 engines</a></li>
+<li><a href=https://falcosuessgott.github.io/vkv/09_advanced_examples/sops/>encrypt & decrypt using sops</a></li>
+</ul>
+</li>
+<li><a href=https://falcosuessgott.github.io/vkv/10_development/>Development</a>
+</li>
+</ul>
+</nav>
+<div class=sidebar-footer></div>
+</div>
+</div><a href=# id=backtothetop-fixed class=backtothetop data-backtothetop-duration=600 data-backtothetop-easing=easeOutQuart data-backtothetop-fixed-fadein=1000 data-backtothetop-fixed-fadeout=1000 data-backtothetop-fixed-bottom=10 data-backtothetop-fixed-right=20>
+<span class="fa-layers fa-fw">
+<i class="fas fa-circle"></i>
+<i class="fas fa-arrow-circle-up"></i>
+</span></a>
+</div>
+</body>
+</html>
