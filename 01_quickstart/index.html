@@ -206,7 +206,7 @@ export username<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;
 </code></pre></div><h3 id=05-import-secrets-using-vkv>05. Import secrets using <code>vkv</code></h3>
 <p>Meanwhile <code>vkv export</code> can be used to store secrets, <code>vkv import</code> is used to import secrets from a <code>vkv export</code> command (either <code>yaml</code> or <code>json</code> format is accepted).</p>
 <p>Knowing this, we can copy a secret engine to another secret engine:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>yaml --show-values | vkv import - -p copy
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>yaml | vkv import - -p copy
 reading secrets from STDIN
 parsing secrets from YAML
 writing secret <span style=color:#e6db74>&#34;copy/db/dev&#34;</span> 
@@ -230,10 +230,9 @@ copy/
         ├── password<span style=color:#f92672>=</span>************
         └── username<span style=color:#f92672>=</span>****
 </code></pre></div><p>Or even to another Vault instance:</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>yaml --show-values| VAULT_ADDR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;...&#34;</span> VAULT_TOKEN<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;...&#34;</span> vkv import - -p copy
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret -f<span style=color:#f92672>=</span>yaml | VAULT_ADDR<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;...&#34;</span> VAULT_TOKEN<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;...&#34;</span> vkv import - -p copy
 <span style=color:#f92672>[</span>...<span style=color:#f92672>]</span>
-</code></pre></div><p>Dont forget to set <code>--show-values</code> otherwise <code>vkv</code> will import masked <code>secrets</code>.</p>
-<p>The <code>-</code> tells <code>vkv</code> to read the secrets from STDIN. You cal also specifiy a file using the <code>--file</code> parameter.</p>
+</code></pre></div><p>The <code>-</code> tells <code>vkv</code> to read the secrets from STDIN. You cal also specifiy a file using the <code>--file</code> parameter.</p>
 <p><code>vkv</code> will create the <code>KVv2</code> engine if it doesn&rsquo;t exist. If the engine indeed exists, <code>vkv</code> will error unless <code>--force</code> is used.</p>
 <p>You can also copy subpaths to other engines:</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vkv export -p secret/admin -f<span style=color:#f92672>=</span>yaml --show-values| vkv import - -p admin
