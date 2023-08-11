@@ -31,7 +31,7 @@ type importOptions struct {
 }
 
 // NewImportCmd import subcommand.
-//nolint: cyclop, gocognit
+// nolint: cyclop, gocognit
 func NewImportCmd(writer io.Writer, vaultClient *vault.Vault) *cobra.Command {
 	var err error
 
@@ -127,7 +127,7 @@ func (o *importOptions) parseEnvs() error {
 	return nil
 }
 
-//nolint: cyclop
+// nolint: cyclop
 func (o *importOptions) validateFlags(args []string) error {
 	switch {
 	case len(args) == 0 && o.Path == "":

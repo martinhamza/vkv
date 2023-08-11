@@ -92,7 +92,7 @@ func (v *Vault) ReadSecrets(rootPath, subPath string) (map[string]interface{}, e
 	}
 
 	if data == nil {
-		return nil, fmt.Errorf("no secrets in %s found", path.Join(rootPath, subPath))
+		return nil, nil
 	}
 
 	if d, ok := data.Data["data"]; ok {

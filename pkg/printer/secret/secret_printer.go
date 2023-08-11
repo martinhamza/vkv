@@ -176,7 +176,7 @@ func NewPrinter(opts ...Option) *Printer {
 }
 
 // Out prints out the secrets according all configured options.
-//nolint: cyclop
+// nolint: cyclop
 func (p *Printer) Out(enginePath string, secrets map[string]interface{}) error {
 	for k, v := range secrets {
 		if !p.showValues {

@@ -42,6 +42,8 @@ func (p *Printer) maskValues(secrets map[string]interface{}) map[string]interfac
 		m, ok := v.(map[string]interface{})
 		if ok {
 			res[k] = p.maskValues(m)
+		} else if v == nil {
+			secrets[k] = nil
 		} else {
 			n := fmt.Sprintf("%v", v)
 			if len(n) > p.valueLength && p.valueLength != -1 {

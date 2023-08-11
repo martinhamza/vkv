@@ -77,7 +77,7 @@ func NewPrinter(opts ...Option) *Printer {
 }
 
 // Out prits out namespaces in various formats.
-//nolint: cyclop
+// nolint: cyclop
 func (p *Printer) Out(ns map[string][]string) error {
 	nsList := p.buildNamespaceList(ns)
 

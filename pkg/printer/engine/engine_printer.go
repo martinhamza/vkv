@@ -85,7 +85,7 @@ func NewPrinter(opts ...Option) *Printer {
 }
 
 // Out prints out engines.
-//nolint: cyclop
+// nolint: cyclop
 func (p *Printer) Out(engines map[string][]string) error {
 	engineList := p.buildEngineList(engines)
 

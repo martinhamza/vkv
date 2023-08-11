@@ -39,6 +39,7 @@ type exportOptions struct {
 }
 
 // NewExportCmd export subcommand.
+//
 //nolint:lll
 func NewExportCmd(writer io.Writer, vaultClient *vault.Vault) *cobra.Command {
 	var err error

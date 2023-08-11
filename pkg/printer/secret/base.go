@@ -21,7 +21,11 @@ func (p *Printer) printBase(enginePath string, secrets map[string]interface{}) e
 
 	for _, i := range utils.SortMapKeys(m) {
 		//nolint: forcetypeassert
-		tree.AddTree(p.printTree(enginePath, i, m[i].(map[string]interface{})))
+		if v, ok := m[i].(map[string]interface{}); ok {
+			tree.AddTree(p.printTree(enginePath, i, m[i].(map[string]interface{})))
+		} else {
+			tree.AddTree(p.printTree(enginePath, i, v))
+		}
 	}
 
 	fmt.Fprint(p.writer, tree.Print())

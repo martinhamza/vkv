@@ -22,7 +22,7 @@ func (p *Printer) printMarkdownTable(enginePath string, secrets map[string]inter
 	return nil
 }
 
-//nolint: gocognit, nestif, cyclop
+// nolint: gocognit, nestif, cyclop
 func (p *Printer) buildMarkdownTable(enginePath string, secrets map[string]interface{}) ([]string, [][]string) {
 	data := [][]string{}
 	headers := []string{}

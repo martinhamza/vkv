@@ -72,7 +72,7 @@ func (o *snapshotRestoreOptions) parseEnvs() error {
 	return nil
 }
 
-//nolint: cyclop
+// nolint: cyclop
 func (o *snapshotRestoreOptions) restoreSecrets(v *vault.Vault, source string) error {
 	return filepath.Walk(source, func(p string, info os.FileInfo, err error) error {
 		if err != nil {
